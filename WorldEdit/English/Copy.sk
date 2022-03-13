@@ -10,26 +10,26 @@ command //copy [<text>]:
 	description: &fWorldEdit command //copy.
 	trigger:
 		if sender = player:
-			if {WorldEdit::wand::pos1::%{_s}'s uuid%::%{_s}'s world%} and {WorldEdit::wand::pos2::%{_s}'s uuid%::%{_s}'s world%} is set:
-				if {WorldEdit::savealready::%{_s}'s uuid%} is not set:
+			if {WorldEdit::wand::pos1::%player's uuid%::%player's world%} and {WorldEdit::wand::pos2::%player's uuid%::%player's world%} is set:
+				if {WorldEdit::savealready::%player's uuid%} is not set:
 					delete {WorldEdit::copypaste::copyblocktype::%player's uuid%.use::*}
-					set {WorldEdit::copypaste::pos1blocklocationz::%player's uuid%} to x coordinate of {WorldEdit::wand::pos1location::%{_s}'s uuid%::%{_s}'s world%} - x coordinate of block at player
-					set {WorldEdit::copypaste::pos1blocklocationy::%player's uuid%} to y coordinate of {WorldEdit::wand::pos1location::%{_s}'s uuid%::%{_s}'s world%} - y coordinate of block at player
-					set {WorldEdit::copypaste::pos1blocklocationz::%player's uuid%} to z coordinate of {WorldEdit::wand::pos1location::%{_s}'s uuid%::%{_s}'s world%} - z coordinate of block at player
-					set {WorldEdit::copypaste::pos2blocklocationx::%player's uuid%} to x coordinate of {WorldEdit::wand::pos2location::%{_s}'s uuid%::%{_s}'s world%} - x coordinate of block at player
-					set {WorldEdit::copypaste::pos2blocklocationy::%player's uuid%} to y coordinate of {WorldEdit::wand::pos2location::%{_s}'s uuid%::%{_s}'s world%} - y coordinate of block at player
-					set {WorldEdit::copypaste::pos2blocklocationz::%player's uuid%} to z coordinate of {WorldEdit::wand::pos2location::%{_s}'s uuid%::%{_s}'s world%} - z coordinate of block at player
+					set {WorldEdit::copypaste::pos1blocklocationz::%player's uuid%} to x coordinate of {WorldEdit::wand::pos1location::%player's uuid%::%player's world%} - x coordinate of block at player
+					set {WorldEdit::copypaste::pos1blocklocationy::%player's uuid%} to y coordinate of {WorldEdit::wand::pos1location::%player's uuid%::%player's world%} - y coordinate of block at player
+					set {WorldEdit::copypaste::pos1blocklocationz::%player's uuid%} to z coordinate of {WorldEdit::wand::pos1location::%player's uuid%::%player's world%} - z coordinate of block at player
+					set {WorldEdit::copypaste::pos2blocklocationx::%player's uuid%} to x coordinate of {WorldEdit::wand::pos2location::%player's uuid%::%player's world%} - x coordinate of block at player
+					set {WorldEdit::copypaste::pos2blocklocationy::%player's uuid%} to y coordinate of {WorldEdit::wand::pos2location::%player's uuid%::%player's world%} - y coordinate of block at player
+					set {WorldEdit::copypaste::pos2blocklocationz::%player's uuid%} to z coordinate of {WorldEdit::wand::pos2location::%player's uuid%::%player's world%} - z coordinate of block at player
 					wait 1 tick
-					set {WorldEdit::copypaste::count::%{_s}'s uuid%} to 0
-					loop blocks within {WorldEdit::wand::pos1location::%{_s}'s uuid%::%{_s}'s world%} to {WorldEdit::wand::pos2location::%{_s}'s uuid%::%{_s}'s world%}:
-						add 1 to {WorldEdit::copypaste::count::%{_s}'s uuid%}
-						set {WorldEdit::copypaste::copyblocktype::%player's uuid%.use::%{WorldEdit::copypaste::count::%{_s}'s uuid%}%} to type of loop-block
+					set {WorldEdit::copypaste::count::%player's uuid%} to 0
+					loop blocks within {WorldEdit::wand::pos1location::%player's uuid%::%player's world%} to {WorldEdit::wand::pos2location::%player's uuid%::%player's world%}:
+						add 1 to {WorldEdit::copypaste::count::%player's uuid%}
+						set {WorldEdit::copypaste::copyblocktype::%player's uuid%.use::%{WorldEdit::copypaste::count::%player's uuid%}%} to type of loop-block
 					send "&dYou have copy %size of {WorldEdit::copypaste::copyblocktype::%player's uuid%.use::*}% &dblocks." to player
 					stop
 				else:
 					send "&4| &8x &cYou already have a backup in progress..." to player
 					stop
-			if {WorldEdit::wand::pos1::%{_s}'s uuid%::%{_s}'s world%} or {WorldEdit::wand::pos2::%{_s}'s uuid%::%{_s}'s world%} isn't set:
+			if {WorldEdit::wand::pos1::%player's uuid%::%player's world%} or {WorldEdit::wand::pos2::%player's uuid%::%player's world%} isn't set:
 				send "&4| &8x &cYou must create position 1 and 2 to be able to use this command." to player
 				stop
 		if sender = console:
