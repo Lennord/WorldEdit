@@ -9,7 +9,7 @@ function WorldEditDeselectionCmd(s: sender):
 	send "&dYou have deselect all positions and mores... !" to {_s}
 	stop
 
-function WorldEditDeselectionJoin(sender: sender):
+function WorldEditDeselectionJoin(s: sender):
 	delete {WorldEdit::*}
 	stop
 
