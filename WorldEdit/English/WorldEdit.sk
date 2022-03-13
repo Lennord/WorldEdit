@@ -11,7 +11,7 @@ function WorldEditWorldeditCmdReload(s: sender):
 
 function WorldEditWorldeditCmdInfo(s: sender):
 	send "" to {_s}
-	send "&c| &6Informations:&f%nl%%nl%&8| &7Name of plugin&6: &cWorldEdit &7(&cSkript&7)&f%nl%&8| &7Description of plugin&6: &cWorldEdit is a skript plugin that allows you to redo the Java plugin from A to Z but in script with improvements and new features.&f%nl%&8| &7Creator of plugin&6: &cAlexisl315 &7(Aliases: &cLennord&7)&f%nl%&8| &7Version of plugin&6: &c1.1.0 RELEASE&f%nl%&8| &7Support version&6: &c1.18.2&f%nl%&8| &7Plugins required&6: &cSkript&7/&cSkQuery&7/&cSkellett&7/&cSkRayfall &7and &cSkungee &7(for &cBungeecord&7)" to {_s}
+	send "&c| &6Informations:&f%nl%%nl%&8| &7Name of plugin&6: &cWorldEdit &7(&cSkript&7)&f%nl%&8| &7Description of plugin&6: &cWorldEdit is a skript plugin that allows you to redo the Java plugin from A to Z but in script with improvements and new features.&f%nl%&8| &7Creator of plugin&6: &cAlexisl315 &7(Aliases: &cLennord&7)&f%nl%&8| &7Version of plugin&6: &c1.2.0 RELEASE&f%nl%&8| &7Support version&6: &c1.18.2&f%nl%&8| &7Plugins required&6: &cSkript&7/&cSkQuery&7/&cSkellett&7/&cSkRayfall &7and &cSkungee &7(for &cBungeecord&7)" to {_s}
 	stop
 
 function WorldEditWorldeditHelpCmd(s: sender):
