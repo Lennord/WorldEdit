@@ -15,7 +15,7 @@ function WorldEditFixAllCmd(s: sender, i: item):
 				if loop-block is a air:
 					if block under the loop-block is not a air:
 						set loop-value to {_i}
-			send "&dYou have set %{WorldEdit.use.wand.use.pos1andpos2.use.distanceblocks.use.%{_s}'s uuid%.use.%{_s}'s world%.use}% &dblocks." to {_s}
+			send "&dYou have set %{WorldEdit::wand::distance::%{_s}'s uuid%::%{_s}'s world%}% &dblocks." to {_s}
 			stop
 		if {WorldEdit::wand::pos1::%{_s}'s uuid%::%{_s}'s world%} or {WorldEdit::wand::pos2::%{_s}'s uuid%::%{_s}'s world%} isn't set:
 			send "&4| &8x &cYou must create position 1 and 2 to be able to use this command." to {_s}
