@@ -1,0 +1,153 @@
+# |-> WorldEdit (Skript) << # |->> Skript developed by alexisl315 (Lennord)
+
+# |-> This skript plugin allows you to redo and improve the WorldEdit plugin (Java) but in skript.
+
+# |-> PLUGIN CODE:
+
+function WorldEditPos1Cmd(s: sender):
+	if {WorldEdit::savealready::%{_s}'s uuid%} isn't set:
+		if {WorldEdit::wand::pos2::%{_s}'s uuid%::%{_s}'s world%} isn't set:
+			set {WorldEdit::wand::pos1::%{_s}'s uuid%::%{_s}'s world%} to true
+			set {WorldEdit::wand::pos1location::%{_s}'s uuid%::%{_s}'s world%} to location of block at location of {_s}
+			send "&dYou have created position 1. &d(&dx: &c%x-location of block at location of {_s}%&d, y: &c%y-location of block at location of {_s}%&d, z: &c%z-location of block at location of {_s}%&d)" to {_s}
+			stop
+		else:
+			set {WorldEdit::wand::pos1::%{_s}'s uuid%::%{_s}'s world%} to true
+			set {WorldEdit::wand::pos1location::%{_s}'s uuid%::%{_s}'s world%} to location of block at location of {_s}
+			send "&dYou have created position 1. &d(&dx: &c%x-location of block at location of {_s}%&d, y: &c%y-location of block at location of {_s}%&d, z: &c%z-location of block at location of {_s}%&d) (&c%amount of blocks within {WorldEdit::wand::pos1location::%{_s}'s uuid%::%{_s}'s world%} to {WorldEdit::wand::pos2location::%{_s}'s uuid%::%{_s}'s world%}%" to {_s}
+			set {WorldEdit::wand::distance::%{_s}'s uuid%::%{_s}'s world%} to amount of blocks within {WorldEdit::wand::pos1location::%{_s}'s uuid%::%{_s}'s world%} to {WorldEdit::wand::pos2location::%{_s}'s uuid%::%{_s}'s world%}
+			stop
+	else:
+		send "&4| &8x &cYou already have a backup in progress..." to {_s}
+		stop
+
+function WorldEditPos2Cmd(s: sender):
+	if {WorldEdit::savealready::%{_s}'s uuid%} isn't set:
+		if {WorldEdit::wand::pos1::%{_s}'s uuid%::%{_s}'s world%} isn't set:
+			set {WorldEdit::wand::pos2::%{_s}'s uuid%::%{_s}'s world%} to true
+			set {WorldEdit::wand::pos2location::%{_s}'s uuid%::%{_s}'s world%} to location of block at location of {_s}
+			send "&dYou have created position 2. &d(&dx: &c%x-location of block at location of {_s}%&d, y: &c%y-location of block at location of {_s}%&d, z: &c%z-location of block at location of {_s}%&d)" to {_s}
+			stop
+		else:
+			set {WorldEdit::wand::pos2::%{_s}'s uuid%::%{_s}'s world%} to true
+			set {WorldEdit::wand::pos2location::%{_s}'s uuid%::%{_s}'s world%} to location of block at location of {_s}
+			send "&dYou have created position 2. &d(&dx: &c%x-location of block at location of {_s}%&d, y: &c%y-location of block at location of {_s}%&d, z: &c%z-location of block at location of {_s}%&d) (&c%amount of blocks within {WorldEdit::wand::pos1location::%{_s}'s uuid%::%{_s}'s world%} to {WorldEdit::wand::pos2location::%{_s}'s uuid%::%{_s}'s world%}%" to {_s}
+			set {WorldEdit::wand::distance::%{_s}'s uuid%::%{_s}'s world%} to amount of blocks within {WorldEdit::wand::pos1location::%{_s}'s uuid%::%{_s}'s world%} to {WorldEdit::wand::pos2location::%{_s}'s uuid%::%{_s}'s world%}
+			stop
+	else:
+		send "&4| &8x &cYou already have a backup in progress..." to {_s}
+		stop
+
+function WorldEditHpos1Cmd(s: sender):
+	if {WorldEdit::savealready::%{_s}'s uuid%} isn't set:
+		if {WorldEdit::wand::pos2::%{_s}'s uuid%::%{_s}'s world%} isn't set:
+			set {WorldEdit::wand::pos1::%{_s}'s uuid%::%{_s}'s world%} to true
+			set {WorldEdit::wand::pos1location::%{_s}'s uuid%::%{_s}'s world%} to location of targeted block of {_s}
+			send "&dYou have created position 1. &d(&c%location of targeted block of {_s}%&d)" to {_s}
+			stop
+		else:
+			set {WorldEdit::wand::pos1::%{_s}'s uuid%::%{_s}'s world%} to true
+			set {WorldEdit::wand::pos1location::%{_s}'s uuid%::%{_s}'s world%} to location of targeted block of {_s}
+			send "&dYou have created position 1. &d(&c%location of targeted block of {_s}%&d) (&c%amount of blocks within {WorldEdit::wand::pos1location::%{_s}'s uuid%::%{_s}'s world%} to {WorldEdit::wand::pos2location::%{_s}'s uuid%::%{_s}'s world%}%" to {_s}
+			set {WorldEdit::wand::distance::%{_s}'s uuid%::%{_s}'s world%} to amount of blocks within {WorldEdit::wand::pos1location::%{_s}'s uuid%::%{_s}'s world%} to {WorldEdit::wand::pos2location::%{_s}'s uuid%::%{_s}'s world%}
+			stop
+	else:
+		send "&4| &8x &cYou already have a backup in progress..." to {_s}
+		stop
+
+function WorldEditHpos2Cmd(s: sender):
+	if {WorldEdit::savealready::%{_s}'s uuid%} isn't set:
+		if {WorldEdit::wand::pos1::%{_s}'s uuid%::%{_s}'s world%} isn't set:
+			set {WorldEdit::wand::pos2::%{_s}'s uuid%::%{_s}'s world%} to true
+			set {WorldEdit::wand::pos2location::%{_s}'s uuid%::%{_s}'s world%} to location of targeted block of {_s}
+			send "&dYou have created position 2. &d(&c%location of targeted block of {_s}%&d)" to {_s}
+			stop
+		else:
+			set {WorldEdit::wand::pos2::%{_s}'s uuid%::%{_s}'s world%} to true
+			set {WorldEdit::wand::pos2location::%{_s}'s uuid%::%{_s}'s world%} to location of targeted block of {_s}
+			send "&dYou have created position 2. &d(&c%location of targeted block of {_s}%&d) (&c%amount of blocks within {WorldEdit::wand::pos1location::%{_s}'s uuid%::%{_s}'s world%} to {WorldEdit::wand::pos2location::%{_s}'s uuid%::%{_s}'s world%}%" to {_s}
+			set {WorldEdit::wand::distance::%{_s}'s uuid%::%{_s}'s world%} to amount of blocks within {WorldEdit::wand::pos1location::%{_s}'s uuid%::%{_s}'s world%} to {WorldEdit::wand::pos2location::%{_s}'s uuid%::%{_s}'s world%}
+			stop
+	else:
+		send "&4| &8x &cYou already have a backup in progress..." to {_s}
+		stop
+
+command //pos1 [<text>]:
+	executable by: player and console
+	aliases: worldedit:/pos1
+	description: &fWorldEdit command //pos1.
+	trigger:
+		if sender = player:
+			WorldEditPos1Cmd(player)
+		if sender = console:
+			send "&4| &8x &cYou must be a player to use this command." to console
+			stop
+
+on command "//pos1" or "worldedit:/pos1":
+	if sender = player:
+		if player doesn't have permission "worldedit.*" or "worldedit.pos1":
+			cancel event
+			send "&4| &8x &cYou do not have permission to use this command." to player
+			stop
+
+command //pos2 [<text>]:
+	executable by: player and console
+	aliases: worldedit:/pos2
+	description: &fWorldEdit command //pos2.
+	trigger:
+		if sender = player:
+			WorldEditPos2Cmd(player)
+		if sender = console:
+			send "&4| &8x &cYou must be a player to use this command." to console
+			stop
+
+on command "//pos2" or "worldedit:/pos2":
+	if sender = player:
+		if player doesn't have permission "worldedit.*" or "worldedit.pos2":
+			cancel event
+			send "&4| &8x &cYou do not have permission to use this command." to player
+			stop
+
+command //hpos1 [<text>]:
+	executable by: player and console
+	aliases: worldedit:/hpos1
+	description: &fWorldEdit command //hpos1.
+	trigger:
+		if sender = player:
+			if targeted block isn't set:
+				send "&4| &8x &cYou must target a block that is not air." to player
+				stop
+			else:
+				WorldEditHpos1Cmd(player)
+		if sender = console:
+			send "&4| &8x &cYou must be a player to use this command." to console
+			stop
+
+on command "//hpos1" or "worldedit:/hpos1":
+	if sender = player:
+		if player doesn't have permission "worldedit.*" or "worldedit.hpos1":
+			cancel event
+			send "&4| &8x &cYou do not have permission to use this command." to player
+			stop
+
+command //hpos2 [<text>]:
+	executable by: player and console
+	aliases: worldedit:/hpos2
+	description: &fWorldEdit command //hpos2.
+	trigger:
+		if sender = player:
+			if targeted block isn't set:
+				send "&4| &8x &cYou must target a block that is not air." to player
+				stop
+			else:
+				WorldEditHpos2Cmd(player)
+		if sender = console:
+			send "&4| &8x &cYou must be a player to use this command." to console
+			stop
+
+on command "//hpos2" or "worldedit:/hpos2":
+	if sender = player:
+		if player doesn't have permission "worldedit.*" or "worldedit.hpos2":
+			cancel event
+			send "&4| &8x &cYou do not have permission to use this command." to player
+			stop

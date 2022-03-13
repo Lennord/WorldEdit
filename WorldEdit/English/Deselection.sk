@@ -1,0 +1,35 @@
+# |-> WorldEdit (Skript) << # |->> Skript developed by alexisl315 (Lennord)
+
+# |-> This skript plugin allows you to redo and improve the WorldEdit plugin (Java) but in skript !
+
+# |-> PLUGIN CODE:
+
+function WorldEditDeselectionCmd(s: sender):
+	delete {WorldEdit::*}
+	send "&dYou have deselect all positions and mores... !" to {_s}
+	stop
+
+function WorldEditDeselectionJoin(sender: sender):
+	delete {WorldEdit::*}
+	stop
+
+command //desel [<text>]:
+	executable by: player and console
+	aliases: worldedit:/desel, deselect, worldedit:/deselect, clearhistory, worldedit:/clearhistory
+	description: &fWorldEdit command //desel !
+	trigger:
+		if sender = player:
+			WorldEditDeselectionCmd(player)
+		if sender = console:
+			send "&4| &8x &cYou must be a player to use this command !" to console
+			stop
+
+on command "//desel" or "worldedit:/desel" or "//deselect" or "worldedit:/deselect" or "//clearhistory" or "worldedit:/clearhistory":
+	if sender = player:
+		if player doesn't have permission "worldedit.*" or "worldedit.deselect":
+			cancel event
+			send "&4| &8x &cYou do not have permission to use this command !" to player
+			stop
+
+on join:
+	WorldEditDeselectionJoin(player)

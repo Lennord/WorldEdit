@@ -1,0 +1,13 @@
+# |-> WorldEdit (Skript) << # |->> Skript developed by alexisl315 (Lennord)
+
+# |-> This skript plugin allows you to redo and improve the WorldEdit plugin (Java) but in skript !
+
+# |-> PLUGIN CODE:
+
+on load:
+	send "&7[&cWorldEdit&7] &8x &2Enabled" to console
+	stop
+
+on unload:
+	send "&7[&cWorldEdit&7] &8x &4Disabled" to console
+	stop

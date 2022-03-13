@@ -1,0 +1,51 @@
+# |-> WorldEdit (Skript) << # |->> Skript developed by alexisl315 (Lennord)
+
+# |-> This skript plugin allows you to redo and improve the WorldEdit plugin (Java) but in skript !
+
+# |-> PLUGIN CODE:
+
+function WorldEditCountCmd(s: sender, t: text):
+	if {WorldEdit::savealready::%{_s}'s uuid%} is not set:
+		if {WorldEdit::wand::pos1::%{_s}'s uuid%::%{_s}'s world%} and {WorldEdit::wand::pos2::%{_s}'s uuid%::%{_s}'s world%} is set:
+			set {WorldEdit::count::%{_s}'s uuid%} to {_t} parsed as item
+			if {WorldEdit::count::%{_s}'s uuid%} is not a item:
+				send "&4| &cYou must choose a block that exists !" to {_s}
+				stop
+			set {_result::countallblocks} to 0
+			wait 1 tick
+			loop blocks within {WorldEdit::wand::pos1location::%{_s}'s uuid%::%{_s}'s world%} and {WorldEdit::wand::pos2location::%{_s}'s uuid%::%{_s}'s world%}:
+				if loop-block is {WorldEdit::count::%{_s}'s uuid%}:
+					add 1 to {_result::countallblocks}
+			send "&dYou have set %{_result::countallblocks}% &dblocks !" to {_s}
+			stop
+		if {WorldEdit::wand::pos1::%{_s}'s uuid%::%{_s}'s world%} or {WorldEdit::wand::pos2::%{_s}'s uuid%::%{_s}'s world%} isn't set:
+			send "&4| &cYou must create position 1 and 2 to be able to use this command !" to {_s}
+			stop
+	else:
+		send "&4| &cYou already have a backup in progress..." to {_s}
+		stop
+
+command //count [<text>] [<text>]:
+	executable by: player and console
+	aliases: worldedit:/count
+	description: &fWorldEdit command //count !
+	trigger:
+		if sender = player:
+			if arg 1 isn't set:
+				send "" to player
+				send "&6| &8x &6Help:" to player
+				send "" to player
+				send "&6| &f//count &f[&cname of block&f] &8x &7Count of block at all positions !" to player
+				stop
+			else:
+				WorldEditCountCmd(player, arg 1)
+		if sender = console:
+			send "&4| &cYou must be a player to use this command !" to console
+			stop
+
+on command "//count" or "worldedit:/count":
+	if sender = player:
+		if player doesn't have permission "worldedit.*" or "worldedit.count":
+			cancel event
+			send "&4| &cYou do not have permission to use this command !" to player
+			stop

@@ -1,0 +1,48 @@
+# |-> WorldEdit (Skript) << # |->> Skript developed by alexisl315 (Lennord)
+
+# |-> This skript plugin allows you to redo and improve the WorldEdit plugin (Java) but in skript.
+
+#  |-> PLUGIN CODE:
+
+function WorldEditThawCmd(s: sender, n: number):
+	loop blocks in radius {_n} around location of block at location of {_s}:
+		if loop-block is a snow layer or snow:
+			set loop-block to air
+	send "&dYou have delete all snows of %{_n}% &dblocks radius." to {_s}
+	stop
+
+function WorldEditThawHelpCmd(s: sender):
+	send "" to {_s}
+	send "&6| &8x &6Help:" to {_s}
+	send "" to {_s}
+	send "&6| &f//thaw &f[&cnumber&f] &8x &7Set delete all snows of block at position me." to {_s}
+	stop
+
+command //thaw [<number>] [<text>]:
+	executable by: player and console
+	aliases: worldedit:/thaw
+	description: &fWorldEdit command //thaw.
+	trigger:
+		if sender = player:
+			if arg 1 isn't set:
+				WorldEditThawHelpCmd(player)
+			else:
+				if {WorldEdit::savealready::%player's uuid%} isn't set:
+					if arg 1 >= 1:
+						WorldEditThawCmd(player, arg 1)
+					if arg 1 <= 0:
+						send "&4| &8x &cYou must put a number above 1." to player
+						stop
+				else:
+					send "&4| &8x &cYou already have a backup in progress..." to player
+					stop
+		if sender = console:
+			send "&4| &8x &cYou must be a player to use this command." to console
+			stop
+
+on command "//thaw" or "worldedit:/thaw":
+	if sender = player:
+		if player doesn't have permission "worldedit.*" or "worldedit.thaw":
+			cancel event
+			send "&4| &8x &cYou do not have permission to use this command." to player
+			stop

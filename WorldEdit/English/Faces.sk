@@ -1,0 +1,68 @@
+# |-> WorldEdit (Skript) << # |->> Skript developed by alexisl315 (Lennord)
+
+# |-> This skript plugin allows you to redo and improve the WorldEdit plugin (Java) but in skript.
+
+# |-> PLUGIN CODE:
+
+function WorldEditFacesCmd(s: sender, t: text):
+	if {WorldEdit::savealready::%{_s}'s uuid%} isn't set:
+		if {WorldEdit::wand::pos1::%{_s}'s uuid%::%{_s}'s world%} and {WorldEdit::wand::pos2::%{_s}'s uuid%::%{_s}'s world%} is set:
+			set {WorldEdit::faces::itemuse::%{_s}'s uuid%::*} to {_t} split at ","
+			loop {WorldEdit::faces::itemuse::%{_s}'s uuid%::*}:
+				set {WorldEdit::faces::itemuse::%{_s}'s uuid%::%loop-index%} to loop-value parsed as item
+				if {WorldEdit::faces::itemuse::%{_s}'s uuid%::%loop-index%} is not a item:
+					send "&4| &8x &cYou must choose a block that exists." to {_s}
+					stop
+			wait 1 tick
+			loop blocks within {WorldEdit::wand::pos1location::%{_s}'s uuid%::%{_s}'s world%} to {WorldEdit::wand::pos2location::%{_s}'s uuid%::%{_s}'s world%}:
+				if x coordinate of loop-block is x coordinate of {WorldEdit::wand::pos1location::%{_s}'s uuid%::%{_s}'s world%}:
+					set {WorldEdit::faces::itemblock::%{_s}'s uuid%} to random element out of {WorldEdit::faces::itemuse::%{_s}'s uuid%::*}
+					set loop-block to {WorldEdit::faces::itemblock::%{_s}'s uuid%}
+				else if z coordinate of loop-block is z coordinate of {WorldEdit::wand::pos1location::%{_s}'s uuid%::%{_s}'s world%}:
+					set {WorldEdit::faces::itemblock::%{_s}'s uuid%} to random element out of {WorldEdit::faces::itemuse::%{_s}'s uuid%::*}
+					set loop-block to {WorldEdit::faces::itemblock::%{_s}'s uuid%}
+				else if x coordinate of loop-block is x coordinate of {WorldEdit::wand::pos2location::%{_s}'s uuid%::%{_s}'s world%}:
+					set {WorldEdit::faces::itemblock::%{_s}'s uuid%} to random element out of {WorldEdit::faces::itemuse::%{_s}'s uuid%::*}
+					set loop-block to {WorldEdit::faces::itemblock::%{_s}'s uuid%}
+				else if z coordinate of loop-block is z coordinate of {WorldEdit::wand::pos2location::%{_s}'s uuid%::%{_s}'s world%}:
+					set {WorldEdit::faces::itemblock::%{_s}'s uuid%} to random element out of {WorldEdit::faces::itemuse::%{_s}'s uuid%::*}
+					set loop-block to {WorldEdit::faces::itemblock::%{_s}'s uuid%}
+				else if y coordinate of loop-block is y coordinate of {WorldEdit::wand::pos2location::%{_s}'s uuid%::%{_s}'s world%}:
+					set {WorldEdit::faces::itemblock::%{_s}'s uuid%} to random element out of {WorldEdit::faces::itemuse::%{_s}'s uuid%::*}
+					set loop-block to {WorldEdit::faces::itemblock::%{_s}'s uuid%}
+				else if y coordinate of loop-block is y coordinate of {WorldEdit::wand::pos1location::%{_s}'s uuid%::%{_s}'s world%}:
+					set {WorldEdit::faces::itemblock::%{_s}'s uuid%} to random element out of {WorldEdit::faces::itemuse::%{_s}'s uuid%::*}
+					set loop-block to {WorldEdit::faces::itemblock::%{_s}'s uuid%}
+			send "&dYou have set %{WorldEdit::wand::distance::%{_s}'s uuid%::%{_s}'s world%}% &dblocks." to {_s}
+			stop
+		if {WorldEdit::wand::pos1::%{_s}'s uuid%::%{_s}'s world%} or {WorldEdit::wand::pos2::%{_s}'s uuid%::%{_s}'s world%} isn't set:
+			send "&4| &8x &cYou must create position 1 and 2 to be able to use this command." to {_s}
+			stop
+	else:
+		send "&4| &8x &cYou already have a backup in progress..." to {_s}
+		stop
+
+command //faces [<text>]:
+	executable by: player and console
+	aliases: worldedit:/faces
+	description: &fWorldEdit command //faces.
+	trigger:
+		if sender = player:
+			if arg 1 isn't set:
+				send "" to player
+				send "&6| &8x &6Help:" to player
+				send "" to player
+				send "&6| &f//faces &f[&cname of block&f] &8x &7Set Faces of block at all positions." to player
+				stop
+			else:
+				WorldEditFacesCmd(player, arg 1)
+		if sender is console:
+			send "&4| &8x &cYou must be a player to use this command." to console
+			stop
+
+on command "//faces" or "worldedit:/faces":
+	if sender = player:
+		if player doesn't have permission "worldedit.*" or "worldedit.faces":
+			cancel event
+			send "&4| &8x &cYou do not have permission to use this command." to player
+			stop

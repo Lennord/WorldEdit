@@ -1,0 +1,35 @@
+# |-> WorldEdit (Skript) << # |->> Skript developed by alexisl315 (Lennord)
+
+# |-> This skript plugin allows you to redo and improve the WorldEdit plugin (Java) but in skript.
+
+# |-> PLUGIN CODE:
+
+function WorldEditSizeCmd(s: sender):
+	if {WorldEdit::savealready::%{_s}'s uuid%} isn't set:
+		if {WorldEdit::wand::pos1::%{_s}'s uuid%::%{_s}'s world%} and {WorldEdit::wand::pos2::%{_s}'s uuid%::%{_s}'s world%} is set:
+			send "&dYou have %{WorldEdit::wand::distance::%{_s}'s uuid%::%{_s}'s world%}% &dblocks." to {_s}
+			stop
+		if {WorldEdit::wand::pos1::%{_s}'s uuid%::%{_s}'s world%} or {WorldEdit::wand::pos2::%{_s}'s uuid%::%{_s}'s world%} isn't set:
+			send "&4| &8x &cYou must create position 1 and 2 to be able to use this command." to {_s}
+			stop
+	else:
+		send "&4| &8x &cYou already have a backup in progress..." to {_s}
+		stop
+
+command //size [<text>]:
+	executable by: player and console
+	aliases: worldedit:/size
+	description: &fWorldEdit command //size.
+	trigger:
+		if sender = player:
+			WorldEditSizeCmd(player)
+		if sender = console:
+			send "&4| &8x &cYou must be a player to use this command." to console
+			stop
+
+on command "//size" or "worldedit:/size":
+	if sender = player:
+		if player doesn't have permission "worldedit.*" or "worldedit.size":
+			cancel event
+			send "&4| &8x &cYou do not have permission to use this command." to player
+			stop

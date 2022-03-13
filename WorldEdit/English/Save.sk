@@ -1,0 +1,112 @@
+# |-> WorldEdit (Skript) << # |->> Skript developed by alexisl315 (Lennord)
+
+# |-> This skript plugin allows you to redo and improve the WorldEdit plugin (Java) but in skript.
+
+# |-> PLUGIN CODE:
+
+function WorldEditSaveCmdCreate(s: sender, t: text):
+	if {WorldEdit::savealready::%{_s}'s uuid%} isn't set:
+		if {WorldEdit::savelist::%{_s}'s uuid%::%{_t}%} isn't set:
+			if {WorldEdit::wand::pos1::%{_s}'s uuid%::%{_s}'s world%} and {WorldEdit::wand::pos2::%{_s}'s uuid%::%{_s}'s world%} is set:
+				set {WorldEdit::savealready::%{_s}'s uuid%} to true
+				set {WorldEdit::savelist::%{_s}'s uuid%::%{_t}%} to "%{_t}%"
+				wait 1 tick
+				set {WorldEdit::savelocation::%{_s}'s uuid%::%{_t}%::*} to block saves of blocks within {WorldEdit::wand::pos1location::%{_s}'s uuid%::%{_s}'s world%} to {WorldEdit::wand::pos2location::%{_s}'s uuid%::%{_s}'s world%}
+				wait 1 tick
+				send "&dYou have save %{WorldEdit::wand::distance::%{_s}'s uuid%::%{_s}'s world%}% &dblocks." to {_s}
+				delete {WorldEdit::savealready::%{_s}'s uuid%}
+				stop
+			if {WorldEdit::wand::pos1::%{_s}'s uuid%::%{_s}'s world%} or {WorldEdit::wand::pos2::%{_s}'s uuid%::%{_s}'s world%} isn't set:
+				send "&4| &8x &cYou did not copy the blocks from position 1 and 2." to {_s}
+				stop
+		else:
+			send "&4| &8x &cYou have already the save &6%{_t}%&c." to {_s}
+			stop
+	else:
+		send "&4| &8x &cYou already have a backup in progress..." to {_s}
+		stop
+
+function WorldEditSaveCmdDelete(s: sender, t: text):
+	if {WorldEdit::savelist::%{_s}'s uuid%::%{_t}%} isn't set:
+		send "&4| &8x &cThe save &6%{_t}% &cdoes not exist." to {_s}
+		stop
+	else:
+		delete {WorldEdit::savelist::%{_s}'s uuid%::%{_t}%}
+		delete {WorldEdit::savealready::%{_s}'s uuid%}
+		delete {WorldEdit::savelocation::%{_s}'s uuid%::%{_t}%}
+		send "&dYou have deleted the save &c%{_t}%&d." to {_s}
+		stop
+
+function WorldEditSaveCmdLoad(s: sender, t: text):
+	if {WorldEdit::savelist::%{_s}'s uuid%::%{_t}%} isn't set:
+		send "&4| &8x &cThe save &6%{_t}% &cdoes not exist." to {_s}
+		stop
+	else:
+		loop {WorldEdit::savelocation::%{_s}'s uuid%::%{_t}%::*}:
+			set block at loop-value to loop-value
+		wait 1 tick
+		send "&dYou have load the save &c%{_t}%&d." to {_s}
+		stop
+
+function WorldEditSaveCmdList(s: sender):
+	if {WorldEdit::savelist::%{_s}'s uuid%::*} is set:
+		set {_result::savelist} to 0
+		send "" to {_s}
+		send "&6| &8x &6List of saves:" to {_s}
+		send "" to {_s}
+		loop {WorldEdit::savelist::%{_s}'s uuid%::*}:
+			add 1 to {_result::savelist} 
+			send "&6| &8x &6Save &7%{_result::savelist}%&7: &c%loop-value%" to {_s}
+		stop
+	else:
+		send "&4| &8x &cYou have no save." to {_s}
+		stop
+
+function WorldEditSaveHelpCmd(s: sender):
+	send "" to {_s}
+	send "&6| &8x &6Help:" to {_s}
+	send "" to {_s}
+	send "&6| &f//save &bcreate &f[&cname of new save&f] &8x &7Create save all block at all positions." to {_s}
+	send "&6| &f//save &bdelete &f[&cname of save&f] &8x &7Delete save." to {_s}
+	send "&6| &f//save &bload &f[&cname of new save&f] &8x &7Load saving block undo." to {_s}
+	send "&6| &f//save &blist &8x &7List of all saves." to {_s}
+	stop
+
+command //save [<text>] [<text>]:
+	executable by: player and console
+	aliases: worldedit:/save
+	description: &fWorldEdit command //save.
+	trigger:
+		if sender = player:
+			if arg 1 isn't set:
+				WorldEditSaveHelpCmd(player)
+			else:
+				if arg 1 != "create" or "delete" or "load" or "list":
+					WorldEditSaveHelpCmd(player)
+				if arg 1 = "create":
+					if arg 2 isn't set:
+						WorldEditSaveHelpCmd(player)
+					else:
+						WorldEditSaveCmdCreate(player, arg 2)
+				if arg 1 = "delete":
+					if arg 2 isn't set:
+						WorldEditSaveHelpCmd(player)
+					else:
+						WorldEditSaveCmdDelete(player, arg 2)
+				if arg 1 = "load":
+					if arg 2 isn't set:
+						WorldEditSaveHelpCmd(player)
+					else:
+						WorldEditSaveCmdLoad(player, arg 2)
+				if arg 1 = "list":
+					WorldEditSaveCmdList(player)
+		if sender = console:
+			send "&4| &8x &cYou must be a player to use this command." to console
+			stop
+
+on command "//save" or "worldedit:/save":
+	if sender = player:
+		if player doesn't have permission "worldedit.*" or "worldedit.save":
+			cancel event
+			send "&4| &8x &cYou do not have permission to use this command." to player
+			stop

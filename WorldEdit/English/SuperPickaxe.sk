@@ -1,0 +1,54 @@
+# |-> WorldEdit (Skript) << # |->> Skript developed by alexisl315 (Lennord)
+
+# |-> This skript plugin allows you to redo and improve the WorldEdit plugin (Java) but in skript.
+
+# |-> PLUGIN CODE:
+
+function WorldEditSuperpickaxeCmd(s: sender):
+	if {WorldEdit::savealready::%{_s}'s uuid%} isn't set:
+		if {WorldEdit::superpickaxe::%{_s}'s uuid%} isn't set:
+			if {_s} has permission "worldedit.*" or "worldedit.superpickaxe.*" or "worldedit.superpickaxe.enable":
+				set {WorldEdit::superpickaxe::%{_s}'s uuid%} to true
+				send "&dYou have enabled to super pickaxe." to {_s}
+				stop
+			else:
+				send "&4| &8x &cYou do not have permission to use this command." to {_s}
+				stop
+		else:
+			if {_s} has permission "worldedit.*" or "worldedit.superpickaxe.*" or "worldedit.superpickaxe.disable":
+				delete {WorldEdit::superpickaxe::%{_s}'s uuid%}
+				send "&dYou have disabled to super pickaxe." to {_s}
+				stop
+			else:
+				send "&4| &8x &cYou do not have permission to use this command." to {_s}
+				stop
+	if {WorldEdit::savealready::%{_s}'s uuid%} is set:
+		send "&4| &8x &cYou already have a backup in progress..." to {_s}
+		stop
+
+command //superpickaxe [<text>]:
+	executable by: player and console
+	aliases: worldedit:/superpickaxe
+	description: &fWorldEdit command //superpickaxe.
+	trigger:
+		if sender = player:
+			WorldEditSuperpickaxeCmd(player)
+		if sender = console:
+			send "&4| &8x &cYou must be a player to use this command." to console
+			stop
+
+on command "//superpickaxe" or "worldedit:/superpickaxe":
+	if sender = player:
+		if player doesn't have permission "worldedit.*" or "worldedit.superpickaxe":
+			cancel event
+			send "&4| &8x &cYou do not have permission to use this command." to player
+			stop
+
+on break:
+	if {WorldEdit::superpickaxe::%player's uuid%} is set:
+		if gamemode of player = survival or adventure:
+			if tool of player = wooden pickaxe or stone pickaxe or iron pickaxe or golden pickaxe or diamond pickaxe or netherite pickaxe:
+				clear drops
+				set event-block to air
+				drop event-block at location of event-block
+				stop

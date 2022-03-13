@@ -1,0 +1,64 @@
+# |-> WorldEdit (Skript) << # |->> Skript developed by alexisl315 (Lennord)
+
+# |-> This skript plugin allows you to redo and improve the WorldEdit plugin (Java) but in skript.
+
+# |-> PLUGIN CODE:
+
+function WorldEditWorldeditCmdReload(s: sender):
+	make console execute command "/sk reload WorldEdit/"
+	send "&6You have restarted the plugin." to {_s}
+	stop
+
+function WorldEditWorldeditCmdInfo(s: sender):
+	send "" to {_s}
+	send "&c| &6Informations:&f%nl%%nl%&8| &7Name of plugin&6: &cWorldEdit &7(&cSkript&7)&f%nl%&8| &7Description of plugin&6: &cWorldEdit is a skript plugin that allows you to redo the Java plugin from A to Z but in script with improvements and new features.&f%nl%&8| &7Creator of plugin&6: &cAlexisl315 &7(Aliases: &cLennord&7)&f%nl%&8| &7Version of plugin&6: &c1.1.0 RELEASE&f%nl%&8| &7Support version&6: &c1.18.2&f%nl%&8| &7Plugins required&6: &cSkript&7/&cSkQuery&7/&cSkellett&7/&cSkRayfall &7and &cSkungee &7(for &cBungeecord&7)" to {_s}
+	stop
+
+function WorldEditWorldeditHelpCmd(s: sender):
+	send "" to {_s}
+	send "&6| &8x &6Help:" to {_s}
+	send "" to {_s}
+	send "&6| &f/worldedit &breload &8x &7Reload the skript." to {_s}
+	send "&6| &f/worldedit &binfo &8x &7Info to the skript." to {_s}
+	stop
+
+command /worldedit [<text>] [<text>]:
+	executable by: player and console
+	aliases: worldedit:worldedit, we, worldedit:we
+	description: &fWorldEdit command /worldedit.
+	trigger:
+		if sender = player:
+			if arg 1 isn't set:
+				WorldEditWorldeditHelpCmd(player)
+			else:
+				if arg 1 != "reload" or "info":
+					WorldEditWorldeditHelpCmd(player)
+				if arg 1 = "reload":
+					if player has permission "worldedit.*" or "worldedit.worldedit.reload" or "worldedit.worldedit.*":
+						WorldEditWorldeditCmdReload(player)
+					else:
+						send "&4| &cYou do not have permission to use this command." to player
+						stop
+				if arg 1 = "info":
+					if player has permission "worldedit.*" or "worldedit.worldedit.info" or "worldedit.worldedit.*":
+						WorldEditWorldeditCmdInfo(player)
+					else:
+						send "&4| &cYou do not have permission to use this command." to player
+						stop
+		if sender = console:
+			if arg 1 isn't set:
+				WorldEditWorldeditHelpCmd(console)
+			else:
+				if arg 1 != "reload" or "info":
+					WorldEditWorldeditHelpCmd(console)
+				if arg 1 = "reload":
+					WorldEditWorldeditCmdReload(console)
+				if arg 1 = "info":
+					WorldEditWorldeditCmdInfo(console)
+
+on command "worldedit" or "worldedit:worldedit" or "we" or "worldedit:we":
+	if sender = player:
+		if player doesn't have permission "worldedit.*" or "worldedit.worldedit":
+			cancel event
+			send "&4| &cYou do not have permission to use this command." to player
+			stop

@@ -1,0 +1,71 @@
+# |-> WorldEdit (Skript) << # |->> Skript developed by alexisl315 (Lennord)
+
+# |-> This skript plugin allows you to redo and improve the WorldEdit plugin (Java) but in skript.
+
+# |-> PLUGIN CODE:
+
+function WorldEditExtinguishCmdNoArg(s: sender, t: text):
+	if {WorldEdit::savealready::%{_s}'s uuid%} is not set:
+		loop blocks in radius {_t} around location of block at location of {_s}:
+			if loop-block = fire or lava:
+				set loop-block to air
+		send "&dYou have remove all fire for player's radius." to {_s}
+		stop
+	else:
+		send "&4| &8x &cYou already have a backup in progress..." to {_s}
+		stop
+
+function WorldEditExtinguishCmd(s: sender, t: text, p: offline player):
+	if {WorldEdit::savealready::%{_s}'s uuid%} is not set:
+		if {_s} has permission "worldedit.*" or "worldedit.extinguish.%{_p}%" or "worldedit.extinguish.*":
+			if {_p} is online:
+				if {_p} != "%{_s}%":
+					loop blocks in radius {_t} around location of block at location of {_p}:
+						if loop-block = fire or lava:
+							set loop-block to air
+					send "&dYou have remove all fire for player's radius." to {_s}
+					stop
+				else:
+					send "&4| &8x &cYou cannot remove all fire for yourself." to {_s}
+					stop
+			else:
+				send "&4| &8x &cYou must put the name of a player connected to the server." to {_s}
+				stop
+		else:
+			send "&4| &8x &cYou do not have permission to use this command." to {_s}
+			stop
+	else:
+		send "&4| &8x &cYou already have a backup in progress..." to {_s}
+		stop
+
+command //ex [<number>] [<offline player>] [<text>]:
+	executable by: player and console
+	aliases: worldedit:/ex, //extinguish, worldedit:/extinguish
+	description: &fWorldEdit command //ex.
+	trigger:
+		if sender = player:
+			if arg 1 isn't set:
+				send "" to player
+				send "&6| &8x &6Help:" to player
+				send "" to player
+				send "&6| &f//ex &f[&cnumber&f] &f[&7Option: &cname of player&f] &8x &7Set air of fire at all positions." to player
+				stop
+			else:
+				if arg 1 >= 1:
+					if arg 2 isn't set:
+						WorldEditExtinguishCmdNoArg(player, "%arg 1%")
+					else:
+						WorldEditExtinguishCmd(player, "%arg 1%", arg 2)
+				if arg 1 <= 0:
+					send "&4| &8x &cYou must put a number above 1." to player
+					stop	
+		if sender = console:
+			send "&4| &8x &cYou must be a player to use this command." to console
+			stop
+
+on command "//ex" or "worldedit:/ex" or "//extinguish" or "worldedit:/extinguish":
+	if sender = player:
+		if player doesn't have permission "worldedit.*" or "worldedit.extinguish":
+			cancel event
+			send "&4| &8x &cYou do not have permission to use this command." to player
+			stop
