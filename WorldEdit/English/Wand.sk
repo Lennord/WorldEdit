@@ -11,7 +11,7 @@ function WorldEditWandCmd(s: sender):
 	else:
 		if {WorldEdit::savealready::%{_s}'s uuid%} isn't set:
 			give wooden axe of sharpness 0 named "&6» &7WorldEdit" with lore "", "&7Description: &6This item allows to create position 1 and 2 !", "", "&7Use: &cLeft click to create position 1 !" and "     &cRight click to create position 2 !" with no NBT to {_s}
-			send "&7[&cWorldEdit&7] &dYou have obtained the main object of WorldEdit !" to {_s}
+			send "&dYou have obtained the main object of WorldEdit !" to {_s}
 			stop
 		else:
 			send "&4| &8x &cYou already have a backup in progress..." to {_s}
