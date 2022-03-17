@@ -38,7 +38,7 @@ command //cyl [<number>] [<text>]:
 			if arg 1 isn't set:
 				WorldEditCylHelpCmd(player)
 			else:
-				if {WorldEdit.use.save.use.pos1andpos2.use.savealready.use.%player's uuid%.use} is not set:
+				if {WorldEdit::savealready::%player's uuid%} is not set:
 					if arg 1 >= 1:
 						if arg 2 isn't set:
 							WorldEditCylHelpCmd(player)
