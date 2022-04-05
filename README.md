@@ -1,5 +1,5 @@
 # WorldEdit
-WorldEdit is a skript plugin that allows you to redo the Java plugin from A to Z but in script with improvements and new features.
+WorldEdit is a skript allows you to redo all or almost all the functionality of the WorldEdit and FastAsyncWorldEdit plugin.
 
 Spigot: https://www.spigotmc.org/resources/worldedit-skript-1-17-1-1-18-2.91559/
 
