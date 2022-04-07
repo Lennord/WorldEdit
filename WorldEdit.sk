@@ -4,31 +4,33 @@
 #   --> Code:
 
 on join:
-	load "plugins/WorldEdit/players/%player%/who.yml"
-	if yaml value "wand.stats" from "who" doesn't exist:
+	if yaml file "plugins/WorldEdit/players/%player%/who.yml" doesn't exist:
+		load "plugins/WorldEdit/players/%player%/who.yml"
 		set yaml value "wand.stats" from "who" to false
-	if yaml value "undo.stats" from "who" doesn't exist:
 		set yaml value "undo.stats" from "who" to false
 		set yaml value "undo.numbers" from "who" to 0
-	if yaml value "redo.stats" from "who" doesn't exist:
 		set yaml value "redo.stats" from "who" to false
 		set yaml value "redo.numbers" from "who" to 0
-	save yaml "who"
-	unload yaml "who"
-	stop
+		save yaml "who"
+		unload yaml "who"
+		stop
 
 on load:
-	load "plugins/WorldEdit/config.yml"
-	if yaml value "language" from "config" doesn't exist:
+	if yaml file "plugins/WorldEdit/config.yml" doesn't exist:
+		load "plugins/WorldEdit/config.yml"
 		set yaml value "language" from "config" to "English"
-	else:
-		if yaml value "language" from "config" != "English":
-			set yaml value "language" from "config" to "English"
-	if yaml value "wand.stats" from "config" doesn't exist:
 		set yaml value "wand.stats" from "config" to true
 		set yaml value "wand.item-type" from "config" to wooden axe
-	save yaml "config"
-	unload yaml "config"
+		save yaml "config"
+		unload yaml "config"
+		stop
+	else:
+		load "plugins/WorldEdit/config.yml"
+		if yaml value "language" from "config" != "English":
+			set yaml value "language" from "config" to "English"
+		save yaml "config"
+		unload yaml "config"
+		stop
 
 on load:
 	send "&7[&bWorldEdit&7] &8x &2Enabled" to console
