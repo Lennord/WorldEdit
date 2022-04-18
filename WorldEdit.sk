@@ -850,18 +850,19 @@ on right click:
 					send "&4| &8x &cThe wand has been disabled for this server." to {_s}
 					stop
 			else:
-				load "plugins/WorldEdit/players/%player%/who.yml"
-				set yaml value "wand.stats" from "who" to true
-				set yaml value "wand.pos2.stats" from "who" to true
-				set yaml value "wand.pos2.location" from "who" to location of clicked block
-				if yaml value "language" from "config" = "English":
-					if yaml value "wand.pos1.stats" from "who" doesn't exist:
-						send "&dYou have created position 2. &d(&dx: &c%x-location of clicked block%&d, y: &c%y-location of clicked block%&d, z: &c%z-location of clicked block%&d)" to player
-					else:
-						send "&dYou have created position 2. &d(&dx: &c%x-location of clicked block%&d, y: &c%y-location of clicked block%&d, z: &c%z-location of clicked block%&d) (&c%amount of blocks within yaml value "wand.pos1.location" from "who" and yaml value "wand.pos2.location" from "who"%&d)" to player
-				save yaml "who"
-				unload yaml "who"
-				stop
+				if clicked block is set:
+					load "plugins/WorldEdit/players/%player%/who.yml"
+					set yaml value "wand.stats" from "who" to true
+					set yaml value "wand.pos2.stats" from "who" to true
+					set yaml value "wand.pos2.location" from "who" to location of clicked block
+					if yaml value "language" from "config" = "English":
+						if yaml value "wand.pos1.stats" from "who" doesn't exist:
+							send "&dYou have created position 2. &d(&dx: &c%x-location of clicked block%&d, y: &c%y-location of clicked block%&d, z: &c%z-location of clicked block%&d)" to player
+						else:
+							send "&dYou have created position 2. &d(&dx: &c%x-location of clicked block%&d, y: &c%y-location of clicked block%&d, z: &c%z-location of clicked block%&d) (&c%amount of blocks within yaml value "wand.pos1.location" from "who" and yaml value "wand.pos2.location" from "who"%&d)" to player
+					save yaml "who"
+					unload yaml "who"
+					stop
 
 on left click:
 	if player has permission "worldedit.wand.leftclick" or "worldedit.wand.*" or "worldedit.*":
@@ -873,18 +874,19 @@ on left click:
 					send "&4| &8x &cThe wand has been disabled for this server." to {_s}
 					stop
 			else:
-				load "plugins/WorldEdit/players/%player%/who.yml"
-				set yaml value "wand.stats" from "who" to true
-				set yaml value "wand.pos1.stats" from "who" to true
-				set yaml value "wand.pos1.location" from "who" to location of clicked block
-				if yaml value "language" from "config" = "English":
-					if yaml value "wand.pos2.stats" from "who" doesn't exist:
-						send "&dYou have created position 1. &d(&dx: &c%x-location of clicked block%&d, y: &c%y-location of clicked block%&d, z: &c%z-location of clicked block%&d)" to player
-					else:
-						send "&dYou have created position 1. &d(&dx: &c%x-location of clicked block%&d, y: &c%y-location of clicked block%&d, z: &c%z-location of clicked block%&d) (&c%amount of blocks within yaml value "wand.pos1.location" from "who" and yaml value "wand.pos2.location" from "who"%&d)" to player
-				save yaml "who"
-				unload yaml "who"
-				stop
+				if clicked block is set:
+					load "plugins/WorldEdit/players/%player%/who.yml"
+					set yaml value "wand.stats" from "who" to true
+					set yaml value "wand.pos1.stats" from "who" to true
+					set yaml value "wand.pos1.location" from "who" to location of clicked block
+					if yaml value "language" from "config" = "English":
+						if yaml value "wand.pos2.stats" from "who" doesn't exist:
+							send "&dYou have created position 1. &d(&dx: &c%x-location of clicked block%&d, y: &c%y-location of clicked block%&d, z: &c%z-location of clicked block%&d)" to player
+						else:
+							send "&dYou have created position 1. &d(&dx: &c%x-location of clicked block%&d, y: &c%y-location of clicked block%&d, z: &c%z-location of clicked block%&d) (&c%amount of blocks within yaml value "wand.pos1.location" from "who" and yaml value "wand.pos2.location" from "who"%&d)" to player
+					save yaml "who"
+					unload yaml "who"
+					stop
 
 on right click on iron door:
 	if player has permission "worldedit.irondoor.open" or "worldedit.*":
