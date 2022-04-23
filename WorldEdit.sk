@@ -168,6 +168,13 @@ function WorldEditHelp(s: sender, typehelp: text):
 			send "&8| &f//cyl &7[&cradius&7] &7[&cname of block&7] &8x &7Spawn cylinder at your location." to {_s}
 			send "" to {_s}
 			stop
+		if {_typehelp} = "DownCMD":
+			send "" to {_s}
+			send "&8| &8x &6Help:" to {_s}
+			send "" to {_s}
+			send "&8| &f//down &7[&cnumber&7] &8x &7Teleport at location down." to {_s}
+			send "" to {_s}
+			stop
 
 function WorldEditCMDToggleeditwand(s: sender):
 	load "plugins/WorldEdit/config.yml"
@@ -888,6 +895,20 @@ on left click:
 					unload yaml "who"
 					stop
 
+function WorldEditCMDDown(s: sender, n: integer):
+	if y coordinate of location at {_s} - {_n} <= -64:
+		send "&4| &8x &cYou have reached the minimum height." to {_s}
+		stop
+	else:
+		teleport {_s} to location {_s}'s x-location, y coordinate of location at {_s} - {_n}, {_s}'s z-location in world {_s}'s world
+		wait 1 tick
+		if block under {_s} = air or cave air or water or lava:
+			set block under {_s} to glass
+		load "plugins/WorldEdit/config.yml"
+		if yaml value "language" from "config" = "English":
+			send "&dYou have down to %{_n}% &dblocks." to {_s}
+			stop
+
 on right click on iron door:
 	if player has permission "worldedit.irondoor.open" or "worldedit.*":
 		toggle event-block
@@ -1467,5 +1488,23 @@ command //cyl [<integer>] [<text>]:
 on command "//cyl" or "/worldedit:/cyl" or "//cylinder" or "/worldedit:/cycylinder":
 	if sender = player:
 		if player doesn't have permission "worldedit.cyl" or "worldedit.*":
+			cancel event
+			WorldEditNoPermission(player)
+
+command //down [<integer>] [<text>]:
+	aliases: worldedit:/down
+	description: &fWorldedit command //down.
+	trigger:
+		if sender = player:
+			if arg 1 isn't set:
+				WorldEditHelp(player, "DownCMD")
+			else:
+				WorldEditCMDDown(player, arg 1)
+		if sender = console:
+			WorldEditNoCommandConsole(console)
+
+on command "//down" or "/worldedit:/down":
+	if sender = player:
+		if player doesn't have permission "worldedit.down" or "worldedit.*":
 			cancel event
 			WorldEditNoPermission(player)
