@@ -4,7 +4,7 @@
 #   --> Code:
 
 on join:
-	if yaml file "plugins/WorldEdit/players/%player%/who.yml" doesn't exist:
+	yaml file "plugins/WorldEdit/players/%player%/who.yml" doesn't exist:
 		load "plugins/WorldEdit/players/%player%/who.yml"
 		set yaml value "wand.stats" from "who" to false
 		set yaml value "undo.stats" from "who" to false
@@ -16,7 +16,7 @@ on join:
 		stop
 
 on load:
-	if yaml file "plugins/WorldEdit/config.yml" doesn't exist:
+	yaml file "plugins/WorldEdit/config.yml" doesn't exist:
 		load "plugins/WorldEdit/config.yml"
 		set yaml value "language" from "config" to "English"
 		set yaml value "wand.stats" from "config" to true
@@ -26,7 +26,7 @@ on load:
 		stop
 	else:
 		load "plugins/WorldEdit/config.yml"
-		if yaml value "language" from "config" != "English":
+		yaml value "language" from "config" != "English":
 			set yaml value "language" from "config" to "English"
 		save yaml "config"
 		unload yaml "config"
@@ -34,160 +34,139 @@ on load:
 
 on load:
 	send "&7[&bWorldEdit&7] &8x &2Enabled" to console
-	stop
 
 on unload:
 	send "&7[&bWorldEdit&7] &8x &cDisabled" to console
-	stop
 
 function WorldEditNoPermission(s: sender):
 	load "plugins/WorldEdit/config.yml"
-	if yaml value "language" from "config" = "English":
+	yaml value "language" from "config" = "English":
 		send "&4| &8x &cYou have not permission to use this command." to {_s}
-		stop
 
 function WorldEditNoCommandConsole(s: sender):
 	load "plugins/WorldEdit/config.yml"
-	if yaml value "language" from "config" = "English":
+	yaml value "language" from "config" = "English":
 		send "&4| &8x &cYou must be a player to use this command." to {_s}
-		stop
 
 function WorldEditHelp(s: sender, typehelp: text):
 	load "plugins/WorldEdit/config.yml"
-	if yaml value "language" from "config" = "English":
-		if {_typehelp} = "WorldEditCMD":
+	yaml value "language" from "config" = "English":
+		{_typehelp} = "WorldEditCMD":
 			send "" to {_s}
 			send "&8| &8x &6Help:" to {_s}
 			send "" to {_s}
 			send "&8| &f/worldedit &binfo &8x &7Seen informations of this skript." to {_s}
 			send "&8| &f/worldedit &breload &8x &7Reload this skript." to {_s}
 			send "" to {_s}
-			stop
-		if {_typehelp} = "UpCMD":
+		{_typehelp} = "UpCMD":
 			send "" to {_s}
 			send "&8| &8x &6Help:" to {_s}
 			send "" to {_s}
 			send "&8| &f//up &7[&cnumber&7] &8x &7Teleport at location up." to {_s}
 			send "" to {_s}
-			stop
-		if {_typehelp} = "PosCMD":
+		{_typehelp} = "PosCMD":
 			send "" to {_s}
 			send "&8| &8x &6Help:" to {_s}
 			send "" to {_s}
 			send "&8| &f//pos &7[&c1 &for &c2&7] &8x &7Set position at your location." to {_s}
 			send "" to {_s}
-			stop
-		if {_typehelp} = "HposCMD":
+		{_typehelp} = "HposCMD":
 			send "" to {_s}
 			send "&8| &8x &6Help:" to {_s}
 			send "" to {_s}
 			send "&8| &f//hpos &7[&c1 &for &c2&7] &8x &7Set position at your targeted's block." to {_s}
 			send "" to {_s}
-			stop
-		if {_typehelp} = "SetCMD":
+		{_typehelp} = "SetCMD":
 			send "" to {_s}
 			send "&8| &8x &6Help:" to {_s}
 			send "" to {_s}
 			send "&8| &f//set &7[&citem type&7] &8x &7Set block type." to {_s}
 			send "" to {_s}
-			stop
-		if {_typehelp} = "SetbiomeCMD":
+		{_typehelp} = "SetbiomeCMD":
 			send "" to {_s}
 			send "&8| &8x &6Help:" to {_s}
 			send "" to {_s}
 			send "&8| &f//setbiome &7[&cbiome type&7] &8x &7Set biome type." to {_s}
 			send "" to {_s}
-			stop
-		if {_typehelp} = "CountCMD":
+		{_typehelp} = "CountCMD":
 			send "" to {_s}
 			send "&8| &8x &6Help:" to {_s}
 			send "" to {_s}
 			send "&8| &f//count &7[&citem type&7] &8x &7Count of the block type." to {_s}
 			send "" to {_s}
-			stop
-		if {_typehelp} = "ThawCMD":
+		{_typehelp} = "ThawCMD":
 			send "" to {_s}
 			send "&8| &8x &6Help:" to {_s}
 			send "" to {_s}
 			send "&8| &f//thaw &7[&cradius&7] &8x &7Delete all snows blocks." to {_s}
 			send "" to {_s}
-			stop
-		if {_typehelp} = "TreeCMD":
+		{_typehelp} = "TreeCMD":
 			send "" to {_s}
 			send "&8| &8x &6Help:" to {_s}
 			send "" to {_s}
 			send "&8| &f//tree &7[&cname of tree&7] &8x &7Spawn the tree type." to {_s}
 			send "" to {_s}
-			stop
-		if {_typehelp} = "ReplaceCMD":
+		{_typehelp} = "ReplaceCMD":
 			send "" to {_s}
 			send "&8| &8x &6Help:" to {_s}
 			send "" to {_s}
 			send "&8| &f//replace &7[&cname of block replace&7] &7[&cname of block&7] &8x &7Replace block type to block type." to {_s}
 			send "" to {_s}
-			stop
-		if {_typehelp} = "SphereCMD":
+		{_typehelp} = "SphereCMD":
 			send "" to {_s}
 			send "&8| &8x &6Help:" to {_s}
 			send "" to {_s}
 			send "&8| &f//sphere &7[&cradius&7] &7[&cname of block&7] &8x &7Spawn sphere at your location." to {_s}
 			send "" to {_s}
-			stop
-		if {_typehelp} = "HsphereCMD":
+		{_typehelp} = "HsphereCMD":
 			send "" to {_s}
 			send "&8| &8x &6Help:" to {_s}
 			send "" to {_s}
 			send "&8| &f//hsphere &7[&cradius&7] &7[&cname of block&7] &8x &7Spawn sphere at your location of target's block." to {_s}
 			send "" to {_s}
-			stop
-		if {_typehelp} = "WallsCMD":
+		{_typehelp} = "WallsCMD":
 			send "" to {_s}
 			send "&8| &8x &6Help:" to {_s}
 			send "" to {_s}
 			send "&8| &f//walls &7[&cname of block&7] &8x &7Set walls of block type." to {_s}
 			send "" to {_s}
-			stop
-		if {_typehelp} = "FacesCMD":
+		{_typehelp} = "FacesCMD":
 			send "" to {_s}
 			send "&8| &8x &6Help:" to {_s}
 			send "" to {_s}
 			send "&8| &f//faces &7[&cname of block&7] &8x &7Set faces of block type." to {_s}
 			send "" to {_s}
-			stop
-		if {_typehelp} = "OverlayCMD":
+		{_typehelp} = "OverlayCMD":
 			send "" to {_s}
 			send "&8| &8x &6Help:" to {_s}
 			send "" to {_s}
 			send "&8| &f//overlay &7[&cname of block&7] &8x &7Set overlay of block type." to {_s}
 			send "" to {_s}
-			stop
-		if {_typehelp} = "CylCMD":
+		{_typehelp} = "CylCMD":
 			send "" to {_s}
 			send "&8| &8x &6Help:" to {_s}
 			send "" to {_s}
 			send "&8| &f//cyl &7[&cradius&7] &7[&cname of block&7] &8x &7Spawn cylinder at your location." to {_s}
 			send "" to {_s}
-			stop
-		if {_typehelp} = "DownCMD":
+		{_typehelp} = "DownCMD":
 			send "" to {_s}
 			send "&8| &8x &6Help:" to {_s}
 			send "" to {_s}
 			send "&8| &f//down &7[&cnumber&7] &8x &7Teleport at location down." to {_s}
 			send "" to {_s}
-			stop
 
 function WorldEditCMDToggleeditwand(s: sender):
 	load "plugins/WorldEdit/config.yml"
-	if yaml value "wand.stats" from "config" = false:
+	yaml value "wand.stats" from "config" = false:
 		set yaml value "wand.stats" from "config" to true
-		if yaml value "language" from "config" = "English":
+		yaml value "language" from "config" = "English":
 			send "&7You have been enabled to worldedit wand." to {_s}
 		save yaml "config"
 		unload yaml "config"
 		stop
 	else:
 		set yaml value "wand.stats" from "config" to false
-		if yaml value "language" from "config" = "English":
+		yaml value "language" from "config" = "English":
 			send "&7You have been disabled to worldedit wand." to {_s}
 		save yaml "config"
 		unload yaml "config"
@@ -195,84 +174,76 @@ function WorldEditCMDToggleeditwand(s: sender):
 
 function WorldEditCMDWand(s: sender):
 	load "plugins/WorldEdit/config.yml"
-	if yaml value "wand.stats" from "config" = false:
-		if yaml value "language" from "config" = "English":
+	yaml value "wand.stats" from "config" = false:
+		yaml value "language" from "config" = "English":
 			send "&4| &8x &cThe wand has been disabled for this server." to {_s}
-			stop
 	else:
-		if yaml value "language" from "config" = "English":
+		yaml value "language" from "config" = "English":
 			give yaml value "wand.item-type" from "config" named "&c&l↪ &7Wand of WorldEdit" to {_s}
 			send "&7You have gived to wand of WorldEdit." to {_s}
-			stop
 
 function WorldEditCMDDeselect(s: sender):
 	load "plugins/WorldEdit/config.yml"
 	load "plugins/WorldEdit/players/%{_s}%/who.yml"
-	if yaml value "wand.stats" from "who" = true:
+	yaml value "wand.stats" from "who" = true:
 		set yaml value "wand.stats" from "who" to false
 		delete yaml value "wand.pos1" from "who"
 		delete yaml value "wand.pos2" from "who"
-		if yaml value "language" from "config" = "English":
+		yaml value "language" from "config" = "English":
 			send "&7You have reset your wand of WorldEdit." to {_s}
 		save yaml "who"
 		unload yaml "who"
 		stop
 	else:
 		send "&4| &8x &cYou have not the selection." to {_s}
-		stop
 
 function WorldEditCMDUp(s: sender, n: integer):
-	if y coordinate of location at {_s} + {_n} >= 320:
+	y coordinate of location at {_s} + {_n} >= 320:
 		send "&4| &8x &cYou have reached the maximum height." to {_s}
-		stop
 	else:
 		teleport {_s} to location {_s}'s x-location, y coordinate of location at {_s} + {_n}, {_s}'s z-location in world {_s}'s world
 		wait 1 tick
-		if block under {_s} = air or cave air or water or lava:
+		block under {_s} = air or cave air or water or lava:
 			set block under {_s} to glass
 		load "plugins/WorldEdit/config.yml"
-		if yaml value "language" from "config" = "English":
+		yaml value "language" from "config" = "English":
 			send "&dYou have up to %{_n}% &dblocks." to {_s}
-			stop
 
 function WorldEditCMDSize(s: sender):
 	load "plugins/WorldEdit/config.yml"
 	load "plugins/WorldEdit/players/%{_s}%/who.yml"
-	if yaml value "wand.pos1.stats" from "who" doesn't exist:
-		if yaml value "language" from "config" = "English":
+	yaml value "wand.pos1.stats" from "who" doesn't exist:
+		yaml value "language" from "config" = "English":
 			send "&4| &8x &cYou have not selection complete." to {_s}
-			stop
 	else:
-		if yaml value "wand.pos2.stats" from "who" doesn't exist:
-			if yaml value "language" from "config" = "English":
+		yaml value "wand.pos2.stats" from "who" doesn't exist:
+			yaml value "language" from "config" = "English":
 				send "&4| &8x &cYou have not selection complete." to {_s}
-				stop
 		else:
-			if yaml value "language" from "config" = "English":
+			yaml value "language" from "config" = "English":
 				send "&dYou have selected &c%amount of blocks within yaml value "wand.pos1.location" from "who" and yaml value "wand.pos2.location" from "who"% &dblocks." to {_s}
-				stop
 
 function WorldEditCMDPos(s: sender, positiontype: text):
 	load "plugins/WorldEdit/config.yml"
 	load "plugins/WorldEdit/players/%{_s}%/who.yml"
-	if {_positiontype} = "1":
+	{_positiontype} = "1":
 		set yaml value "wand.stats" from "who" to true
 		set yaml value "wand.pos1.stats" from "who" to true
 		set yaml value "wand.pos1.location" from "who" to location of {_s}
-		if yaml value "language" from "config" = "English":
-			if yaml value "wand.pos2.stats" from "who" doesn't exist:
+		yaml value "language" from "config" = "English":
+			yaml value "wand.pos2.stats" from "who" doesn't exist:
 				send "&dYou have created position 1. &d(&dx: &c%x-location of {_s}%&d, y: &c%y-location of {_s}%&d, z: &c%z-location of {_s}%&d)" to {_s}
 			else:
 				send "&dYou have created position 1. &d(&dx: &c%x-location of {_s}%&d, y: &c%y-location of {_s}%&d, z: &c%z-location of {_s}%&d) (&c%amount of blocks within yaml value "wand.pos1.location" from "who" and yaml value "wand.pos2.location" from "who"%&d)" to {_s}
 		save yaml "who"
 		unload yaml "who"
 		stop
-	if {_positiontype} = "2":
+	{_positiontype} = "2":
 		set yaml value "wand.stats" from "who" to true
 		set yaml value "wand.pos2.stats" from "who" to true
 		set yaml value "wand.pos2.location" from "who" to location of {_s}
-		if yaml value "language" from "config" = "English":
-			if yaml value "wand.pos1.stats" from "who" doesn't exist:
+		yaml value "language" from "config" = "English":
+			yaml value "wand.pos1.stats" from "who" doesn't exist:
 				send "&dYou have created position 2. &d(&dx: &c%x-location of {_s}%&d, y: &c%y-location of {_s}%&d, z: &c%z-location of {_s}%&d)" to {_s}
 			else:
 				send "&dYou have created position 2. &d(&dx: &c%x-location of {_s}%&d, y: &c%y-location of {_s}%&d, z: &c%z-location of {_s}%&d) (&c%amount of blocks within yaml value "wand.pos1.location" from "who" and yaml value "wand.pos2.location" from "who"%&d)" to {_s}
@@ -281,30 +252,29 @@ function WorldEditCMDPos(s: sender, positiontype: text):
 		stop
 
 function WorldEditCMDHpos(s: sender, positiontype: text):
-	if targeted block of {_s} isn't set:
+	targeted block of {_s} isn't set:
 		send "&4| &8x &cYou must target a block that is not air." to {_s}
-		stop
 	else:
 		load "plugins/WorldEdit/config.yml"
 		load "plugins/WorldEdit/players/%{_s}%/who.yml"
-		if {_positiontype} = "1":
+		{_positiontype} = "1":
 			set yaml value "wand.stats" from "who" to true
 			set yaml value "wand.pos1.stats" from "who" to true
 			set yaml value "wand.pos1.location" from "who" to location of targeted block of {_s}
-			if yaml value "language" from "config" = "English":
-				if yaml value "wand.pos2.stats" from "who" doesn't exist:
+			yaml value "language" from "config" = "English":
+				yaml value "wand.pos2.stats" from "who" doesn't exist:
 					send "&dYou have created position 1. &d(&dx: &c%x-location of targeted block of {_s}%&d, y: &c%y-location of targeted block of {_s}%&d, z: &c%z-location of targeted block of {_s}%&d)" to {_s}
 				else:
 					send "&dYou have created position 1. &d(&dx: &c%x-location of targeted block of {_s}%&d, y: &c%y-location of targeted block of {_s}%&d, z: &c%z-location of targeted block of {_s}%&d) (&c%amount of blocks within yaml value "wand.pos1.location" from "who" and yaml value "wand.pos2.location" from "who"%&d)" to {_s}
 			save yaml "who"
 			unload yaml "who"
 			stop
-		if {_positiontype} = "2":
+		{_positiontype} = "2":
 			set yaml value "wand.stats" from "who" to true
 			set yaml value "wand.pos2.stats" from "who" to true
 			set yaml value "wand.pos2.location" from "who" to location of targeted block of {_s}
-			if yaml value "language" from "config" = "English":
-				if yaml value "wand.pos1.stats" from "who" doesn't exist:
+			yaml value "language" from "config" = "English":
+				yaml value "wand.pos1.stats" from "who" doesn't exist:
 					send "&dYou have created position 2. &d(&dx: &c%x-location of targeted block of {_s}%&d, y: &c%y-location of targeted block of {_s}%&d, z: &c%z-location of targeted block of {_s}%&d)" to {_s}
 				else:
 					send "&dYou have created position 2. &d(&dx: &c%x-location of targeted block of {_s}%&d, y: &c%y-location of targeted block of {_s}%&d, z: &c%z-location of targeted block of {_s}%&d) (&c%amount of blocks within yaml value "wand.pos1.location" from "who" and yaml value "wand.pos2.location" from "who"%&d)" to {_s}
@@ -320,16 +290,15 @@ function WorldEditCMDDelchunk(s: sender):
 	set {WorldEdit::%{_s}'s uuid%::undo::saves::%yaml value "undo.numbers" from "who"%::*} to block saves of blocks within chunk at location of {_s}
 	wait 1 tick
 	set all blocks within chunk at location of {_s} to air
-	if yaml value "language" from "config" = "English":
+	yaml value "language" from "config" = "English":
 		send "&dYou have remove your chunk." to {_s}
 	save yaml "who"
 	unload yaml "who"
 	stop
 
 function WorldEditCMDHdelchunk(s: sender):
-	if targeted block of {_s} isn't set:
+	targeted block of {_s} isn't set:
 		send "&4| &8x &cYou must target a block that is not air." to {_s}
-		stop
 	else:
 		load "plugins/WorldEdit/config.yml"
 		load "plugins/WorldEdit/players/%{_s}%/who.yml"
@@ -338,7 +307,7 @@ function WorldEditCMDHdelchunk(s: sender):
 		set {WorldEdit::%{_s}'s uuid%::undo::saves::%yaml value "undo.numbers" from "who"%::*} to block saves of blocks within chunk at location of targeted block of {_s}
 		wait 1 tick
 		set all blocks within chunk at location of targeted block of {_s} to air
-		if yaml value "language" from "config" = "English":
+		yaml value "language" from "config" = "English":
 			send "&dYou have remove your chunk." to {_s}
 		save yaml "who"
 		unload yaml "who"
@@ -347,13 +316,12 @@ function WorldEditCMDHdelchunk(s: sender):
 function WorldEditCMDUndo(s: sender):
 	load "plugins/WorldEdit/config.yml"
 	load "plugins/WorldEdit/players/%{_s}%/who.yml"
-	if yaml value "undo.numbers" from "who" <= 0:
+	yaml value "undo.numbers" from "who" <= 0:
 		set yaml value "undo.numbers" from "who" to 0
-		if yaml value "language" from "config" = "English":
+		yaml value "language" from "config" = "English":
 			send "&4| &8x &cYou have no turning back." to {_s}
 		save yaml "who"
 		unload yaml "who"
-		stop
 	else:
 		set yaml value "redo.numbers" from "who" to yaml value "redo.numbers" from "who" + 1 
 		wait 1 tick
@@ -363,7 +331,7 @@ function WorldEditCMDUndo(s: sender):
 			set block at loop-value to loop-value
 		wait 1 tick
 		set yaml value "undo.numbers" from "who" to yaml value "undo.numbers" from "who" - 1
-		if yaml value "language" from "config" = "English":
+		yaml value "language" from "config" = "English":
 			send "&dYou have gone back." to {_s}
 		save yaml "who"
 		unload yaml "who"
@@ -372,9 +340,9 @@ function WorldEditCMDUndo(s: sender):
 function WorldEditCMDRedo(s: sender):
 	load "plugins/WorldEdit/config.yml"
 	load "plugins/WorldEdit/players/%{_s}%/who.yml"
-	if yaml value "redo.numbers" from "who" <= 0:
+	yaml value "redo.numbers" from "who" <= 0:
 		set yaml value "redo.numbers" from "who" to 0
-		if yaml value "language" from "config" = "English":
+		yaml value "language" from "config" = "English":
 			send "&4| &8x &cYou have no turning back." to {_s}
 		save yaml "who"
 		unload yaml "who"
@@ -388,7 +356,7 @@ function WorldEditCMDRedo(s: sender):
 			set block at loop-value to loop-value
 		wait 1 tick
 		set yaml value "redo.numbers" from "who" to yaml value "redo.numbers" from "who" - 1
-		if yaml value "language" from "config" = "English":
+		yaml value "language" from "config" = "English":
 			send "&dYou have gone back." to {_s}
 		save yaml "who"
 		unload yaml "who"
@@ -397,20 +365,19 @@ function WorldEditCMDRedo(s: sender):
 function WorldEditCMDSet(s: sender, itemtype: text):
 	load "plugins/WorldEdit/config.yml"
 	load "plugins/WorldEdit/players/%{_s}%/who.yml"
-	if yaml value "wand.pos1.stats" from "who" doesn't exist:
-		if yaml value "language" from "config" = "English":
+	yaml value "wand.pos1.stats" from "who" doesn't exist:
+		yaml value "language" from "config" = "English":
 			send "&4| &8x &cYou have not selection complete." to {_s}
-			stop
 	else:
-		if yaml value "wand.pos2.stats" from "who" doesn't exist:
-			if yaml value "language" from "config" = "English":
+		yaml value "wand.pos2.stats" from "who" doesn't exist:
+			yaml value "language" from "config" = "English":
 				send "&4| &8x &cYou have not selection complete." to {_s}
 				stop
 		else:
 			set {WorldEdit::%{_s}'s uuid%::setblock::*} to {_itemtype} split at ","
 			loop {WorldEdit::%{_s}'s uuid%::setblock::*}:
 				set {WorldEdit::%{_s}'s uuid%::setblock::%loop-index%} to loop-value parsed as item
-				if {WorldEdit::%{_s}'s uuid%::setblock::%loop-index%} is not a item:
+				{WorldEdit::%{_s}'s uuid%::setblock::%loop-index%} is not a item:
 					send "&4| &8x &cYou must choose a block that exists !" to {_s}
 					stop
 			wait 1 tick
@@ -421,7 +388,7 @@ function WorldEditCMDSet(s: sender, itemtype: text):
 			loop blocks within yaml value "wand.pos1.location" from "who" and yaml value "wand.pos2.location" from "who":
 				set {WorldEdit::%{_s}'s uuid%::setblock::randomblock} to random element out of {WorldEdit::%{_s}'s uuid%::setblock::*}
 				set loop-block to {WorldEdit::%{_s}'s uuid%::setblock::randomblock}
-			if yaml value "language" from "config" = "English":
+			yaml value "language" from "config" = "English":
 				send "&dYou have set &c%amount of blocks within yaml value "wand.pos1.location" from "who" and yaml value "wand.pos2.location" from "who"% &dblocks." to {_s}
 			save yaml "who"
 			unload yaml "who"
@@ -430,34 +397,29 @@ function WorldEditCMDSet(s: sender, itemtype: text):
 
 function WorldEditCMDSetbiome(s: sender, biometype: biome):
 	load "plugins/WorldEdit/config.yml"
-	if yaml value "wand.pos1.stats" from "who" doesn't exist:
-		if yaml value "language" from "config" = "English":
+	yaml value "wand.pos1.stats" from "who" doesn't exist:
+		yaml value "language" from "config" = "English":
 			send "&4| &8x &cYou have not selection complete." to {_s}
-			stop
 	else:
-		if yaml value "wand.pos2.stats" from "who" doesn't exist:
-			if yaml value "language" from "config" = "English":
+		yaml value "wand.pos2.stats" from "who" doesn't exist:
+			yaml value "language" from "config" = "English":
 				send "&4| &8x &cYou have not selection complete." to {_s}
-				stop
 		else:
 			loop blocks within yaml value "wand.pos1.location" from "who" and yaml value "wand.pos2.location" from "who":
 				set biome at location of loop-block to {_biometype}
-			if yaml value "language" from "config" = "English":
+			yaml value "language" from "config" = "English":
 				send "&dYou have set biome %{_biometype}% &dat location of position 1 and 2." to {_s}
-				stop
 
 function WorldEditCMDCut(s: sender):
 	load "plugins/WorldEdit/config.yml"
 	load "plugins/WorldEdit/players/%{_s}%/who.yml"
-	if yaml value "wand.pos1.stats" from "who" doesn't exist:
-		if yaml value "language" from "config" = "English":
+	yaml value "wand.pos1.stats" from "who" doesn't exist:
+		yaml value "language" from "config" = "English":
 			send "&4| &8x &cYou have not selection complete." to {_s}
-			stop
 	else:
-		if yaml value "wand.pos2.stats" from "who" doesn't exist:
-			if yaml value "language" from "config" = "English":
+		yaml value "wand.pos2.stats" from "who" doesn't exist:
+			yaml value "language" from "config" = "English":
 				send "&4| &8x &cYou have not selection complete." to {_s}
-				stop
 		else:
 			set yaml value "undo.numbers" from "who" to yaml value "undo.numbers" from "who" + 1 
 			wait 1 tick
@@ -465,7 +427,7 @@ function WorldEditCMDCut(s: sender):
 			wait 1 tick
 			loop blocks within yaml value "wand.pos1.location" from "who" and yaml value "wand.pos2.location" from "who":
 				set loop-block to air
-			if yaml value "language" from "config" = "English":
+			yaml value "language" from "config" = "English":
 				send "&dYou have set &c%amount of blocks within yaml value "wand.pos1.location" from "who" and yaml value "wand.pos2.location" from "who"% &dblocks." to {_s}
 			save yaml "who"
 			unload yaml "who"
@@ -473,78 +435,73 @@ function WorldEditCMDCut(s: sender):
 
 function WorldEditCMDCount(s: sender, itemtype: text):
 	load "plugins/WorldEdit/config.yml"
-	if yaml value "wand.pos1.stats" from "who" doesn't exist:
-		if yaml value "language" from "config" = "English":
+	yaml value "wand.pos1.stats" from "who" doesn't exist:
+		yaml value "language" from "config" = "English":
 			send "&4| &8x &cYou have not selection complete." to {_s}
-			stop
 	else:
-		if yaml value "wand.pos2.stats" from "who" doesn't exist:
-			if yaml value "language" from "config" = "English":
+		yaml value "wand.pos2.stats" from "who" doesn't exist:
+			yaml value "language" from "config" = "English":
 				send "&4| &8x &cYou have not selection complete." to {_s}
-				stop
 		else:
-			if {_itemtype} parsed as item is not a item:
+			{_itemtype} parsed as item is not a item:
 				send "&4| &cYou must choose a block that exists !" to {_s}
 				stop
 			set {_WorldEdit::%{_s}'s uuid%::count} to 0
 			wait 1 tick
 			loop blocks within yaml value "wand.pos1.location" from "who" and yaml value "wand.pos2.location" from "who":
-				if loop-block is {_itemtype} parsed as item:
+				loop-block is {_itemtype} parsed as item:
 					add 1 to {_WorldEdit::%{_s}'s uuid%::count}
 			send "&dYou have %{_WorldEdit::%{_s}'s uuid%::count}% &d%{_itemtype} parsed as item% !" to {_s}
-			stop
 
 function WorldEditCMDFix(s: sender, itemtype: text):
 	load "plugins/WorldEdit/config.yml"
 	load "plugins/WorldEdit/players/%{_s}%/who.yml"
-	if yaml value "wand.pos1.stats" from "who" doesn't exist:
-		if yaml value "language" from "config" = "English":
+	yaml value "wand.pos1.stats" from "who" doesn't exist:
+		yaml value "language" from "config" = "English":
 			send "&4| &8x &cYou have not selection complete." to {_s}
-			stop
 	else:
-		if yaml value "wand.pos2.stats" from "who" doesn't exist:
-			if yaml value "language" from "config" = "English":
+		yaml value "wand.pos2.stats" from "who" doesn't exist:
+			yaml value "language" from "config" = "English":
 				send "&4| &8x &cYou have not selection complete." to {_s}
-				stop
 		else:
-			if {_itemtype} = "WATER":
+			{_itemtype} = "WATER":
 				set yaml value "undo.numbers" from "who" to yaml value "undo.numbers" from "who" + 1 
 				wait 1 tick
 				set {WorldEdit::%{_s}'s uuid%::undo::saves::%yaml value "undo.numbers" from "who"%::*} to block saves of blocks within yaml value "wand.pos1.location" from "who" and yaml value "wand.pos2.location" from "who"
 				wait 1 tick
 				loop blocks within yaml value "wand.pos1.location" from "who" and yaml value "wand.pos2.location" from "who":
-					if loop-block is a air:
-						if block under the loop-block is not a air:
+					loop-block is a air:
+						block under the loop-block is not a air:
 							set loop-value to water
-				if yaml value "language" from "config" = "English":
+				yaml value "language" from "config" = "English":
 					send "&dYou have set &c%amount of blocks within yaml value "wand.pos1.location" from "who" and yaml value "wand.pos2.location" from "who"% &dblocks." to {_s}
 				save yaml "who"
 				unload yaml "who"
 				stop
-			if {_itemtype} = "LAVA":
+			{_itemtype} = "LAVA":
 				set yaml value "undo.numbers" from "who" to yaml value "undo.numbers" from "who" + 1 
 				wait 1 tick
 				set {WorldEdit::%{_s}'s uuid%::undo::saves::%yaml value "undo.numbers" from "who"%::*} to block saves of blocks within yaml value "wand.pos1.location" from "who" and yaml value "wand.pos2.location" from "who"
 				wait 1 tick
 				loop blocks within yaml value "wand.pos1.location" from "who" and yaml value "wand.pos2.location" from "who":
-					if loop-block is a air:
-						if block under the loop-block is not a air:
+					loop-block is a air:
+						block under the loop-block is not a air:
 							set loop-value to lava
-				if yaml value "language" from "config" = "English":
+				yaml value "language" from "config" = "English":
 					send "&dYou have set &c%amount of blocks within yaml value "wand.pos1.location" from "who" and yaml value "wand.pos2.location" from "who"% &dblocks." to {_s}
 				save yaml "who"
 				unload yaml "who"
 				stop
-			if {_itemtype} = "FIRE":
+			{_itemtype} = "FIRE":
 				set yaml value "undo.numbers" from "who" to yaml value "undo.numbers" from "who" + 1 
 				wait 1 tick
 				set {WorldEdit::%{_s}'s uuid%::undo::saves::%yaml value "undo.numbers" from "who"%::*} to block saves of blocks within yaml value "wand.pos1.location" from "who" and yaml value "wand.pos2.location" from "who"
 				wait 1 tick
 				loop blocks within yaml value "wand.pos1.location" from "who" and yaml value "wand.pos2.location" from "who":
-					if loop-block is a air:
-						if block under the loop-block is not a air:
+					loop-block is a air:
+						block under the loop-block is not a air:
 							set loop-value to fire
-				if yaml value "language" from "config" = "English":
+				yaml value "language" from "config" = "English":
 					send "&dYou have set &c%amount of blocks within yaml value "wand.pos1.location" from "who" and yaml value "wand.pos2.location" from "who"% &dblocks." to {_s}
 				save yaml "who"
 				unload yaml "who"
@@ -552,67 +509,60 @@ function WorldEditCMDFix(s: sender, itemtype: text):
 
 function WorldEditCMDThaw(s: sender, n: number):
 	load "plugins/WorldEdit/config.yml"
-	if {_n} >= 1:
+	{_n} >= 1:
 		loop blocks in radius {_n} around location of block at location of {_s}:
-			if loop-block is a snow layer or snow:
+			loop-block is a snow layer or snow:
 				set loop-block to air
-		if yaml value "language" from "config" = "English":
+		yaml value "language" from "config" = "English":
 			send "&dYou have delete all snows blocks of %{_n}% &dradius." to {_s}
-			stop
-	if {_n} <= 0:
-		if yaml value "language" from "config" = "English":
+	{_n} <= 0:
+		yaml value "language" from "config" = "English":
 			send "&4| &8x &cYou must put a number above 1." to {_s}
-			stop
 
 function WorldEditCMDExtinguish(s: sender):
 	load "plugins/WorldEdit/config.yml"
 	load "plugins/WorldEdit/players/%{_s}%/who.yml"
-	if yaml value "wand.pos1.stats" from "who" doesn't exist:
-		if yaml value "language" from "config" = "English":
+	yaml value "wand.pos1.stats" from "who" doesn't exist:
+		yaml value "language" from "config" = "English":
 			send "&4| &8x &cYou have not selection complete." to {_s}
-			stop
 	else:
-		if yaml value "wand.pos2.stats" from "who" doesn't exist:
-			if yaml value "language" from "config" = "English":
+		yaml value "wand.pos2.stats" from "who" doesn't exist:
+			yaml value "language" from "config" = "English":
 				send "&4| &8x &cYou have not selection complete." to {_s}
-				stop
 		else:
 			set yaml value "undo.numbers" from "who" to yaml value "undo.numbers" from "who" + 1 
 			wait 1 tick
 			set {WorldEdit::%{_s}'s uuid%::undo::saves::%yaml value "undo.numbers" from "who"%::*} to block saves of blocks within yaml value "wand.pos1.location" from "who" and yaml value "wand.pos2.location" from "who"
 			wait 1 tick
 			loop blocks within yaml value "wand.pos1.location" from "who" and yaml value "wand.pos2.location" from "who":
-				if loop-block is a lava or fire:
+				loop-block is a lava or fire:
 					set loop-value to air
-			if yaml value "language" from "config" = "English":
+			yaml value "language" from "config" = "English":
 				send "&dYou have set &c%amount of blocks within yaml value "wand.pos1.location" from "who" and yaml value "wand.pos2.location" from "who"% &dblocks." to {_s}
 			save yaml "who"
 			unload yaml "who"
-			stop
 
 function WorldEditCMDReplace(s: sender, itemtype: text, itemtype2: text):
 	load "plugins/WorldEdit/config.yml"
 	load "plugins/WorldEdit/players/%{_s}%/who.yml"
-	if yaml value "wand.pos1.stats" from "who" doesn't exist:
-		if yaml value "language" from "config" = "English":
+	yaml value "wand.pos1.stats" from "who" doesn't exist:
+		yaml value "language" from "config" = "English":
 			send "&4| &8x &cYou have not selection complete." to {_s}
-			stop
 	else:
-		if yaml value "wand.pos2.stats" from "who" doesn't exist:
-			if yaml value "language" from "config" = "English":
+		yaml value "wand.pos2.stats" from "who" doesn't exist:
+			yaml value "language" from "config" = "English":
 				send "&4| &8x &cYou have not selection complete." to {_s}
-				stop
 		else:
 			set {WorldEdit::%{_s}'s uuid%::replace::*} to {_itemtype} split at ","
 			loop {WorldEdit::%{_s}'s uuid%::replace::*}:
 				set {WorldEdit::%{_s}'s uuid%::replace::%loop-index%} to loop-value parsed as item
-				if {WorldEdit::%{_s}'s uuid%::replace::%loop-index%} is not a item:
+				{WorldEdit::%{_s}'s uuid%::replace::%loop-index%} is not a item:
 					send "&4| &8x &cYou must choose a block that exists !" to {_s}
 					stop
 			set {WorldEdit::%{_s}'s uuid%::replace2::*} to {_itemtype2} split at ","
 			loop {WorldEdit::%{_s}'s uuid%::replace2::*}:
 				set {WorldEdit::%{_s}'s uuid%::replace2::%loop-index%} to loop-value parsed as item
-				if {WorldEdit::%{_s}'s uuid%::replace2::%loop-index%} is not a item:
+				{WorldEdit::%{_s}'s uuid%::replace2::%loop-index%} is not a item:
 					send "&4| &8x &cYou must choose a block that exists !" to {_s}
 					stop
 			wait 1 tick
@@ -622,10 +572,10 @@ function WorldEditCMDReplace(s: sender, itemtype: text, itemtype2: text):
 			wait 1 tick
 			loop blocks within yaml value "wand.pos1.location" from "who" and yaml value "wand.pos2.location" from "who":
 				loop {WorldEdit::%{_s}'s uuid%::replace::*}:
-					if loop-block-1 is {WorldEdit::%{_s}'s uuid%::replace::%loop-index%}:
+					loop-block-1 is {WorldEdit::%{_s}'s uuid%::replace::%loop-index%}:
 						set {WorldEdit::%{_s}'s uuid%::replace::randomblock} to random element out of {WorldEdit::%{_s}'s uuid%::replace2::*}
 						set loop-block-1 to {WorldEdit::%{_s}'s uuid%::replace::randomblock}
-			if yaml value "language" from "config" = "English":
+			yaml value "language" from "config" = "English":
 				send "&dYou have set &c%amount of blocks within yaml value "wand.pos1.location" from "who" and yaml value "wand.pos2.location" from "who"% &dblocks." to {_s}
 			save yaml "who"
 			unload yaml "who"
@@ -638,72 +588,64 @@ function WorldEditCMDSphere(s: sender, n: number, itemtype: text):
 	set {WorldEdit::%{_s}'s uuid%::sphere::*} to {_itemtype} split at ","
 	loop {WorldEdit::%{_s}'s uuid%::sphere::*}:
 		set {WorldEdit::%{_s}'s uuid%::sphere::%loop-index%} to loop-value parsed as item
-		if {WorldEdit::%{_s}'s uuid%::sphere::%loop-index%} is not a item:
+		{WorldEdit::%{_s}'s uuid%::sphere::%loop-index%} is not a item:
 			send "&4| &8x &cYou must choose a block that exists !" to {_s}
-			stop
 	wait 1 tick
 	loop blocks in radius {_n} around location of block at location of {_s}:
 		set {WorldEdit::%{_s}'s uuid%::sphere::randomblock} to random element out of {WorldEdit::%{_s}'s uuid%::sphere::*}
 		set loop-block to {WorldEdit::%{_s}'s uuid%::sphere::randomblock}
-	if yaml value "language" from "config" = "English":
+	yaml value "language" from "config" = "English":
 		send "&dYou have spawn a sphere at your location." to {_s}
 	delete {WorldEdit::%{_s}'s uuid%::sphere::randomblock}
-	stop
 
 function WorldEditCMDHsphere(s: sender, n: number, itemtype: text):
 	load "plugins/WorldEdit/config.yml"
 	set {WorldEdit::%{_s}'s uuid%::sphere::*} to {_itemtype} split at ","
 	loop {WorldEdit::%{_s}'s uuid%::sphere::*}:
 		set {WorldEdit::%{_s}'s uuid%::sphere::%loop-index%} to loop-value parsed as item
-		if {WorldEdit::%{_s}'s uuid%::sphere::%loop-index%} is not a item:
+		{WorldEdit::%{_s}'s uuid%::sphere::%loop-index%} is not a item:
 			send "&4| &8x &cYou must choose a block that exists !" to {_s}
-			stop
 	wait 1 tick
 	loop blocks in radius {_n} around location of block at location of targeted block of {_s}:
 		set {WorldEdit::%{_s}'s uuid%::sphere::randomblock} to random element out of {WorldEdit::%{_s}'s uuid%::sphere::*}
 		set loop-block to {WorldEdit::%{_s}'s uuid%::sphere::randomblock}
-	if yaml value "language" from "config" = "English":
+	yaml value "language" from "config" = "English":
 		send "&dYou have spawn a sphere at your location of target's block." to {_s}
 	delete {WorldEdit::%{_s}'s uuid%::sphere::randomblock}
-	stop
 
 function WorldEditCMDSuperpickaxe(s: sender):
 	load "plugins/WorldEdit/config.yml"
 	load "plugins/WorldEdit/players/%{_s}%/who.yml"
-	if yaml value "superpickaxe.stats" from "who" = false:
+	yaml value "superpickaxe.stats" from "who" = false:
 		set yaml value "superpickaxe.stats" from "who" to true
-		if yaml value "language" from "config" = "English":
+		yaml value "language" from "config" = "English":
 			send "&dYou have enabled to the superpickaxe." to {_s}
 		save yaml "who"
 		unload yaml "who"
-		stop
 	else:
 		set yaml value "superpickaxe.stats" from "who" to false
-		if yaml value "language" from "config" = "English":
+		yaml value "language" from "config" = "English":
 			send "&dYou have disabled to the superpickaxe." to {_s}
 		save yaml "who"
 		unload yaml "who"
-		stop
 	delete {WorldEdit::%{_s}'s uuid%::sphere::randomblock}
 	stop
 
 function WorldEditCMDWalls(s: sender, itemtype: text):
 	load "plugins/WorldEdit/config.yml"
 	load "plugins/WorldEdit/players/%{_s}%/who.yml"
-	if yaml value "wand.pos1.stats" from "who" doesn't exist:
-		if yaml value "language" from "config" = "English":
+	yaml value "wand.pos1.stats" from "who" doesn't exist:
+		yaml value "language" from "config" = "English":
 			send "&4| &8x &cYou have not selection complete." to {_s}
-			stop
 	else:
-		if yaml value "wand.pos2.stats" from "who" doesn't exist:
-			if yaml value "language" from "config" = "English":
+		yaml value "wand.pos2.stats" from "who" doesn't exist:
+			yaml value "language" from "config" = "English":
 				send "&4| &8x &cYou have not selection complete." to {_s}
-				stop
 		else:
 			set {WorldEdit::%{_s}'s uuid%::walls::*} to {_itemtype} split at ","
 			loop {WorldEdit::%{_s}'s uuid%::walls::*}:
 				set {WorldEdit::%{_s}'s uuid%::walls::%loop-index%} to loop-value parsed as item
-				if {WorldEdit::%{_s}'s uuid%::walls::%loop-index%} is not a item:
+				{WorldEdit::%{_s}'s uuid%::walls::%loop-index%} is not a item:
 					send "&4| &8x &cYou must choose a block that exists !" to {_s}
 					stop
 			wait 1 tick
@@ -712,7 +654,7 @@ function WorldEditCMDWalls(s: sender, itemtype: text):
 			set {WorldEdit::%{_s}'s uuid%::undo::saves::%yaml value "undo.numbers" from "who"%::*} to block saves of blocks within yaml value "wand.pos1.location" from "who" and yaml value "wand.pos2.location" from "who"
 			wait 1 tick
 			loop blocks within yaml value "wand.pos1.location" from "who" and yaml value "wand.pos2.location" from "who":
-				if x coordinate of loop-block is x coordinate of yaml value "wand.pos1.location" from "who":
+				x coordinate of loop-block is x coordinate of yaml value "wand.pos1.location" from "who":
 					set {WorldEdit::%{_s}'s uuid%::walls::randomblock} to random element out of {WorldEdit::%{_s}'s uuid%::walls::*}
 					set loop-block to {WorldEdit::%{_s}'s uuid%::walls::randomblock}
 				else if z coordinate of loop-block is z coordinate of yaml value "wand.pos1.location" from "who":
@@ -724,7 +666,7 @@ function WorldEditCMDWalls(s: sender, itemtype: text):
 				else if z coordinate of loop-block is z coordinate of yaml value "wand.pos2.location" from "who":
 					set {WorldEdit::%{_s}'s uuid%::walls::randomblock} to random element out of {WorldEdit::%{_s}'s uuid%::walls::*}
 					set loop-block to {WorldEdit::%{_s}'s uuid%::walls::randomblock}
-			if yaml value "language" from "config" = "English":
+			yaml value "language" from "config" = "English":
 				send "&dYou have set &c%amount of blocks within yaml value "wand.pos1.location" from "who" and yaml value "wand.pos2.location" from "who"% &dblocks." to {_s}
 			save yaml "who"
 			unload yaml "who"
@@ -734,20 +676,18 @@ function WorldEditCMDWalls(s: sender, itemtype: text):
 function WorldEditCMDFaces(s: sender, itemtype: text):
 	load "plugins/WorldEdit/config.yml"
 	load "plugins/WorldEdit/players/%{_s}%/who.yml"
-	if yaml value "wand.pos1.stats" from "who" doesn't exist:
-		if yaml value "language" from "config" = "English":
+	yaml value "wand.pos1.stats" from "who" doesn't exist:
+		yaml value "language" from "config" = "English":
 			send "&4| &8x &cYou have not selection complete." to {_s}
-			stop
 	else:
-		if yaml value "wand.pos2.stats" from "who" doesn't exist:
-			if yaml value "language" from "config" = "English":
+		yaml value "wand.pos2.stats" from "who" doesn't exist:
+			yaml value "language" from "config" = "English":
 				send "&4| &8x &cYou have not selection complete." to {_s}
-				stop
 		else:
 			set {WorldEdit::%{_s}'s uuid%::faces::*} to {_itemtype} split at ","
 			loop {WorldEdit::%{_s}'s uuid%::faces::*}:
 				set {WorldEdit::%{_s}'s uuid%::faces::%loop-index%} to loop-value parsed as item
-				if {WorldEdit::%{_s}'s uuid%::faces::%loop-index%} is not a item:
+				{WorldEdit::%{_s}'s uuid%::faces::%loop-index%} is not a item:
 					send "&4| &8x &cYou must choose a block that exists !" to {_s}
 					stop
 			wait 1 tick
@@ -756,7 +696,7 @@ function WorldEditCMDFaces(s: sender, itemtype: text):
 			set {WorldEdit::%{_s}'s uuid%::undo::saves::%yaml value "undo.numbers" from "who"%::*} to block saves of blocks within yaml value "wand.pos1.location" from "who" and yaml value "wand.pos2.location" from "who"
 			wait 1 tick
 			loop blocks within yaml value "wand.pos1.location" from "who" and yaml value "wand.pos2.location" from "who":
-				if x coordinate of loop-block is x coordinate of yaml value "wand.pos1.location" from "who":
+				x coordinate of loop-block is x coordinate of yaml value "wand.pos1.location" from "who":
 					set {WorldEdit::%{_s}'s uuid%::faces::randomblock} to random element out of {WorldEdit::%{_s}'s uuid%::faces::*}
 					set loop-block to {WorldEdit::%{_s}'s uuid%::faces::randomblock}
 				else if z coordinate of loop-block is z coordinate of yaml value "wand.pos1.location" from "who":
@@ -774,7 +714,7 @@ function WorldEditCMDFaces(s: sender, itemtype: text):
 				else if y coordinate of loop-block is y coordinate of yaml value "wand.pos1.location" from "who":
 					set {WorldEdit::%{_s}'s uuid%::faces::randomblock} to random element out of {WorldEdit::%{_s}'s uuid%::faces::*}
 					set loop-block to {WorldEdit::%{_s}'s uuid%::faces::randomblock}
-			if yaml value "language" from "config" = "English":
+			yaml value "language" from "config" = "English":
 				send "&dYou have set &c%amount of blocks within yaml value "wand.pos1.location" from "who" and yaml value "wand.pos2.location" from "who"% &dblocks." to {_s}
 			save yaml "who"
 			unload yaml "who"
@@ -784,20 +724,18 @@ function WorldEditCMDFaces(s: sender, itemtype: text):
 function WorldEditCMDOverlay(s: sender, itemtype: text):
 	load "plugins/WorldEdit/config.yml"
 	load "plugins/WorldEdit/players/%{_s}%/who.yml"
-	if yaml value "wand.pos1.stats" from "who" doesn't exist:
-		if yaml value "language" from "config" = "English":
+	yaml value "wand.pos1.stats" from "who" doesn't exist:
+		yaml value "language" from "config" = "English":
 			send "&4| &8x &cYou have not selection complete." to {_s}
-			stop
 	else:
-		if yaml value "wand.pos2.stats" from "who" doesn't exist:
-			if yaml value "language" from "config" = "English":
+		yaml value "wand.pos2.stats" from "who" doesn't exist:
+			yaml value "language" from "config" = "English":
 				send "&4| &8x &cYou have not selection complete." to {_s}
-				stop
 		else:
 			set {WorldEdit::%{_s}'s uuid%::overlay::*} to {_itemtype} split at ","
 			loop {WorldEdit::%{_s}'s uuid%::overlay::*}:
 				set {WorldEdit::%{_s}'s uuid%::overlay::%loop-index%} to loop-value parsed as item
-				if {WorldEdit::%{_s}'s uuid%::overlay::%loop-index%} is not a item:
+				{WorldEdit::%{_s}'s uuid%::overlay::%loop-index%} is not a item:
 					send "&4| &8x &cYou must choose a block that exists !" to {_s}
 					stop
 			wait 1 tick
@@ -806,11 +744,11 @@ function WorldEditCMDOverlay(s: sender, itemtype: text):
 			set {WorldEdit::%{_s}'s uuid%::undo::saves::%yaml value "undo.numbers" from "who"%::*} to block saves of blocks within yaml value "wand.pos1.location" from "who" and yaml value "wand.pos2.location" from "who"
 			wait 1 tick
 			loop blocks within yaml value "wand.pos1.location" from "who" and yaml value "wand.pos2.location" from "who":
-				if loop-block = air or cave air:
-					if block under the loop-block != air or cave air:
+				loop-block = air or cave air:
+					block under the loop-block != air or cave air:
 						set {WorldEdit::%{_s}'s uuid%::overlay::randomblock} to random element out of {WorldEdit::%{_s}'s uuid%::overlay::*}
 						set loop-block to {WorldEdit::%{_s}'s uuid%::overlay::randomblock}
-			if yaml value "language" from "config" = "English":
+			yaml value "language" from "config" = "English":
 				send "&dYou have set &c%amount of blocks within yaml value "wand.pos1.location" from "who" and yaml value "wand.pos2.location" from "who"% &dblocks." to {_s}
 			save yaml "who"
 			unload yaml "who"
@@ -823,47 +761,44 @@ function WorldEditCMDCyl(s: sender, n: number, itemtype: text):
 	set {WorldEdit::%{_s}'s uuid%::cyl::*} to {_itemtype} split at ","
 	loop {WorldEdit::%{_s}'s uuid%::cyl::*}:
 		set {WorldEdit::%{_s}'s uuid%::cyl::%loop-index%} to loop-value parsed as item
-		if {WorldEdit::%{_s}'s uuid%::cyl::%loop-index%} is not a item:
+		{WorldEdit::%{_s}'s uuid%::cyl::%loop-index%} is not a item:
 			send "&4| &8x &cYou must choose a block that exists !" to {_s}
-			stop
 		wait 1 tick
 		loop blocks in radius {_n} + 1 around block at {_s}:
-			if round(distance between loop-block and block at {_s}) is less than or equal to {_n}:
-				if y-coordinate of loop-block is y-coordinate of block at {_s}:
+			round(distance between loop-block and block at {_s}) is less than or equal to {_n}:
+				y-coordinate of loop-block is y-coordinate of block at {_s}:
 					set {WorldEdit::%{_s}'s uuid%::cyl::randomblock} to random element out of  {WorldEdit::%{_s}'s uuid%::cyl::*}
 					set loop-block to {WorldEdit::%{_s}'s uuid%::cyl::randomblock}
-		if yaml value "language" from "config" = "English":
+		yaml value "language" from "config" = "English":
 			send "&dYou have spawn a cylinder at your location." to {_s}
 		delete {WorldEdit::%{_s}'s uuid%::cyl::*}
-		stop
 
 on break:
 	load "plugins/WorldEdit/players/%player%/who.yml"
-	if yaml value "superpickaxe.stats" from "who" = true:
-		if gamemode of player = survival or adventure:
-			if tool of player = wooden pickaxe or stone pickaxe or iron pickaxe or golden pickaxe or diamond pickaxe or netherite pickaxe:
+	yaml value "superpickaxe.stats" from "who" = true:
+		gamemode of player = survival or adventure:
+			tool of player = wooden pickaxe or stone pickaxe or iron pickaxe or golden pickaxe or diamond pickaxe or netherite pickaxe:
 				clear drops
 				set event-block to air
 				drop event-block at location of event-block
 				stop
 
 on right click:
-	if player has permission "worldedit.wand.rightclick" or "worldedit.wand.*" or "worldedit.*":
-		if name of item = "&c&l↪ &7Wand of WorldEdit":
+	player has permission "worldedit.wand.rightclick" or "worldedit.wand.*" or "worldedit.*":
+		name of item = "&c&l↪ &7Wand of WorldEdit":
 			cancel event
 			load "plugins/WorldEdit/config.yml"
-			if yaml value "wand.stats" from "config" = false:
-				if yaml value "language" from "config" = "English":
+			yaml value "wand.stats" from "config" = false:
+				yaml value "language" from "config" = "English":
 					send "&4| &8x &cThe wand has been disabled for this server." to {_s}
-					stop
 			else:
-				if clicked block is set:
+				clicked block is set:
 					load "plugins/WorldEdit/players/%player%/who.yml"
 					set yaml value "wand.stats" from "who" to true
 					set yaml value "wand.pos2.stats" from "who" to true
 					set yaml value "wand.pos2.location" from "who" to location of clicked block
-					if yaml value "language" from "config" = "English":
-						if yaml value "wand.pos1.stats" from "who" doesn't exist:
+					yaml value "language" from "config" = "English":
+						yaml value "wand.pos1.stats" from "who" doesn't exist:
 							send "&dYou have created position 2. &d(&dx: &c%x-location of clicked block%&d, y: &c%y-location of clicked block%&d, z: &c%z-location of clicked block%&d)" to player
 						else:
 							send "&dYou have created position 2. &d(&dx: &c%x-location of clicked block%&d, y: &c%y-location of clicked block%&d, z: &c%z-location of clicked block%&d) (&c%amount of blocks within yaml value "wand.pos1.location" from "who" and yaml value "wand.pos2.location" from "who"%&d)" to player
@@ -872,22 +807,21 @@ on right click:
 					stop
 
 on left click:
-	if player has permission "worldedit.wand.leftclick" or "worldedit.wand.*" or "worldedit.*":
-		if name of item = "&c&l↪ &7Wand of WorldEdit":
+	player has permission "worldedit.wand.leftclick" or "worldedit.wand.*" or "worldedit.*":
+		name of item = "&c&l↪ &7Wand of WorldEdit":
 			cancel event
 			load "plugins/WorldEdit/config.yml"
-			if yaml value "wand.stats" from "config" = false:
-				if yaml value "language" from "config" = "English":
+			yaml value "wand.stats" from "config" = false:
+				yaml value "language" from "config" = "English":
 					send "&4| &8x &cThe wand has been disabled for this server." to {_s}
-					stop
 			else:
-				if clicked block is set:
+				clicked block is set:
 					load "plugins/WorldEdit/players/%player%/who.yml"
 					set yaml value "wand.stats" from "who" to true
 					set yaml value "wand.pos1.stats" from "who" to true
 					set yaml value "wand.pos1.location" from "who" to location of clicked block
-					if yaml value "language" from "config" = "English":
-						if yaml value "wand.pos2.stats" from "who" doesn't exist:
+					yaml value "language" from "config" = "English":
+						yaml value "wand.pos2.stats" from "who" doesn't exist:
 							send "&dYou have created position 1. &d(&dx: &c%x-location of clicked block%&d, y: &c%y-location of clicked block%&d, z: &c%z-location of clicked block%&d)" to player
 						else:
 							send "&dYou have created position 1. &d(&dx: &c%x-location of clicked block%&d, y: &c%y-location of clicked block%&d, z: &c%z-location of clicked block%&d) (&c%amount of blocks within yaml value "wand.pos1.location" from "who" and yaml value "wand.pos2.location" from "who"%&d)" to player
@@ -896,41 +830,37 @@ on left click:
 					stop
 
 function WorldEditCMDDown(s: sender, n: integer):
-	if y coordinate of location at {_s} - {_n} <= -64:
+	y coordinate of location at {_s} - {_n} <= -64:
 		send "&4| &8x &cYou have reached the minimum height." to {_s}
-		stop
 	else:
 		teleport {_s} to location {_s}'s x-location, y coordinate of location at {_s} - {_n}, {_s}'s z-location in world {_s}'s world
 		wait 1 tick
-		if block under {_s} = air or cave air or water or lava:
+		block under {_s} = air or cave air or water or lava:
 			set block under {_s} to glass
 		load "plugins/WorldEdit/config.yml"
-		if yaml value "language" from "config" = "English":
+		yaml value "language" from "config" = "English":
 			send "&dYou have down to %{_n}% &dblocks." to {_s}
-			stop
 
 on right click on iron door:
-	if player has permission "worldedit.irondoor.open" or "worldedit.*":
+	player has permission "worldedit.irondoor.open" or "worldedit.*":
 		toggle event-block
-		stop
 
 on right click on iron trapdoor:
-	if player has permission "worldedit.irontrapdoor.open" or "worldedit.*":
+	player has permission "worldedit.irontrapdoor.open" or "worldedit.*":
 		toggle event-block
-		stop
 
 command /worldedit [<text>] [<text>]:
 	aliases: /we, worldedit:worldedit, worldedit:we
 	description: &fworldedit command /worldedit.
 	trigger:
-		if arg 1 isn't set:
+		arg 1 isn't set:
 			WorldEditHelp(sender, "WorldEditCMD")
 		else:
-			if arg 1 != "info" or "reload":
+			arg 1 != "info" or "reload":
 				WorldEditHelp(sender, "WorldEditCMD")
-			if arg 1 = "info":
+			arg 1 = "info":
 				load "plugins/WorldEdit/config.yml"
-				if yaml value "language" from "config" = "English":
+				yaml value "language" from "config" = "English":
 					send "" to sender
 					send "&8| &8x &6Help:" to sender
 					send "" to sender
@@ -941,17 +871,15 @@ command /worldedit [<text>] [<text>]:
 					send "&8| &fPlugin requirements: &cSkript&7, &cSkript-YAML &7and &cSkellett" to sender
 					send "&8| &fAll languages of skript: &cEnglish" to sender
 					send "" to sender
-					stop
-			if arg 1 = "reload":
+			arg 1 = "reload":
 				make console execute command "/sk reload WorldEdit"
 				load "plugins/WorldEdit/config.yml"
-				if yaml value "language" from "config" = "English":
+				yaml value "language" from "config" = "English":
 					send "&7You have been reloaded this skript." to sender
-				stop
 
 on command "/worldedit" or "/worldedit:worldedit" or "/we" or "/worldedit:we":
-	if sender = player:
-		if player doesn't have permission "worldedit.worldedit" or "worldedit.*":
+	sender = player:
+		player doesn't have permission "worldedit.worldedit" or "worldedit.*":
 			cancel event
 			WorldEditNoPermission(player)
 
@@ -959,14 +887,14 @@ command //toggleeditwand [<text>]:
 	aliases: worldedit:/toggleeditwand
 	description: &fworldedit command /toggleeditwand.
 	trigger:
-		if sender = player:
+		sender = player:
 			WorldEditCMDToggleeditwand(player)
-		if sender = console:
+		sender = console:
 			WorldEditNoCommandConsole(console)
 
 on command "//toggleeditwand" or "/worldedit:/toggleeditwand":
-	if sender = player:
-		if player doesn't have permission "worldedit.toggleeditwand" or "worldedit.*":
+	sender = player:
+		player doesn't have permission "worldedit.toggleeditwand" or "worldedit.*":
 			cancel event
 			WorldEditNoPermission(player)
 
@@ -975,14 +903,14 @@ command //wand [<text>]:
 	aliases: worldedit:/wand
 	description: &fWorldEdit command //wand.
 	trigger:
-		if sender = player:
+		sender = player:
 			WorldEditCMDWand(player)
-		if sender = console:
+		sender = console:
 			WorldEditNoCommandConsole(console)
 
 on command "//wand" or "/worldedit:/wand":
-	if sender = player:
-		if player doesn't have permission "worldedit.toggleeditwand" or "worldedit.*":
+	sender = player:
+		player doesn't have permission "worldedit.toggleeditwand" or "worldedit.*":
 			cancel event
 			WorldEditNoPermission(player)
 
@@ -990,14 +918,14 @@ command //deselect [<text>]:
 	aliases: worldedit:/deselect, //desel, worldedit:/desel, //deselection, worldedit:/deselection
 	description: &fWorldedit command //deselect.
 	trigger:
-		if sender = player:
+		sender = player:
 			WorldEditCMDDeselect(player)
-		if sender = console:
+		sender = console:
 			WorldEditNoCommandConsole(console)
 
 on command "//deselect" or "/worldedit:/deselect" or "//desel" or "/worldedit:/desel"  or "//deselection" or "/worldedit:/deselection":
-	if sender = player:
-		if player doesn't have permission "worldedit.deselect" or "worldedit.*":
+	sender = player:
+		player doesn't have permission "worldedit.deselect" or "worldedit.*":
 			cancel event
 			WorldEditNoPermission(player)
 
@@ -1005,17 +933,17 @@ command //up [<integer>] [<text>]:
 	aliases: worldedit:/up
 	description: &fWorldedit command //up.
 	trigger:
-		if sender = player:
-			if arg 1 isn't set:
+		sender = player:
+			arg 1 isn't set:
 				WorldEditHelp(player, "UpCMD")
 			else:
 				WorldEditCMDUp(player, arg 1)
-		if sender = console:
+		sender = console:
 			WorldEditNoCommandConsole(console)
 
 on command "//up" or "/worldedit:/up":
-	if sender = player:
-		if player doesn't have permission "worldedit.up" or "worldedit.*":
+	sender = player:
+		player doesn't have permission "worldedit.up" or "worldedit.*":
 			cancel event
 			WorldEditNoPermission(player)
 
@@ -1023,14 +951,14 @@ command //size [<text>]:
 	aliases: worldedit:/size
 	description: &fWorldedit command //size.
 	trigger:
-		if sender = player:
+		sender = player:
 			WorldEditCMDSize(player)
-		if sender = console:
+		sender = console:
 			WorldEditNoCommandConsole(console)
 
 on command "//size" or "/worldedit:/size":
-	if sender = player:
-		if player doesn't have permission "worldedit.size" or "worldedit.*":
+	sender = player:
+		player doesn't have permission "worldedit.size" or "worldedit.*":
 			cancel event
 			WorldEditNoPermission(player)
 
@@ -1038,22 +966,22 @@ command //pos [<text>] [<text>]:
 	aliases: worldedit:/pos, //position, worldedit:/position
 	description: &fWorldedit command //pos.
 	trigger:
-		if sender = player:
-			if arg 1 isn't set:
+		sender = player:
+			arg 1 isn't set:
 				WorldEditHelp(player, "PosCMD")
 			else:
-				if arg 1 != "1" or "2":
+				arg 1 != "1" or "2":
 					WorldEditHelp(player, "PosCMD")
-				if arg 1 = "1":
+				arg 1 = "1":
 					WorldEditCMDPos(player, "1")
-				if arg 1 = "2":
+				arg 1 = "2":
 					WorldEditCMDPos(player, "2")
-		if sender = console:
+		sender = console:
 			WorldEditNoCommandConsole(console)
 
 on command "//pos" or "/worldedit:/pos" or "//position" or "/worldedit:/position":
-	if sender = player:
-		if player doesn't have permission "worldedit.position" or "worldedit.*":
+	sender = player:
+		player doesn't have permission "worldedit.position" or "worldedit.*":
 			cancel event
 			WorldEditNoPermission(player)
 
@@ -1061,22 +989,22 @@ command //hpos [<text>] [<text>]:
 	aliases: worldedit:/hpos, //hposition, worldedit:/hposition
 	description: &fWorldedit command //hpos.
 	trigger:
-		if sender = player:
-			if arg 1 isn't set:
+		sender = player:
+			arg 1 isn't set:
 				WorldEditHelp(player, "HposCMD")
 			else:
-				if arg 1 != "1" or "2":
+				arg 1 != "1" or "2":
 					WorldEditHelp(player, "HposCMD")
-				if arg 1 = "1":
+				arg 1 = "1":
 					WorldEditCMDHpos(player, "1")
-				if arg 1 = "2":
+				arg 1 = "2":
 					WorldEditCMDHpos(player, "2")
-		if sender = console:
+		sender = console:
 			WorldEditNoCommandConsole(console)
 
 on command "//hpos" or "/worldedit:/hpos" or "//hposition" or "/worldedit:/hposition":
-	if sender = player:
-		if player doesn't have permission "worldedit.hposition" or "worldedit.*":
+	sender = player:
+		player doesn't have permission "worldedit.hposition" or "worldedit.*":
 			cancel event
 			WorldEditNoPermission(player)
 
@@ -1084,14 +1012,14 @@ command //delchunk [<text>]:
 	aliases: worldedit:/delchunk, //deletechunk, worldedit:/deletechunk
 	description: &fWorldedit command //delchunk.
 	trigger:
-		if sender = player:
+		sender = player:
 			WorldEditCMDDelchunk(player)
-		if sender = console:
+		sender = console:
 			WorldEditNoCommandConsole(console)
 
 on command "//delchunk" or "/worldedit:/delchunk" or "//deletechunk" or "/worldedit:/deletechunk":
-	if sender = player:
-		if player doesn't have permission "worldedit.delchunk" or "worldedit.*":
+	sender = player:
+		player doesn't have permission "worldedit.delchunk" or "worldedit.*":
 			cancel event
 			WorldEditNoPermission(player)
 
@@ -1099,14 +1027,14 @@ command //hdelchunk [<text>]:
 	aliases: worldedit:/hdelchunk, //hdeletechunk, worldedit:/hdeletechunk
 	description: &fWorldedit command //hdelchunk.
 	trigger:
-		if sender = player:
+		sender = player:
 			WorldEditCMDHdelchunk(player)
-		if sender = console:
+		sender = console:
 			WorldEditNoCommandConsole(console)
 
 on command "//hdelchunk" or "/worldedit:/hdelchunk" or "//hdeletechunk" or "/worldedit:/hdeletechunk":
-	if sender = player:
-		if player doesn't have permission "worldedit.hdelchunk" or "worldedit.*":
+	sender = player:
+		player doesn't have permission "worldedit.hdelchunk" or "worldedit.*":
 			cancel event
 			WorldEditNoPermission(player)
 
@@ -1114,14 +1042,14 @@ command //undo [<text>]:
 	aliases: worldedit:/undo
 	description: &fWorldedit command //undo.
 	trigger:
-		if sender = player:
+		sender = player:
 			WorldEditCMDUndo(player)
-		if sender = console:
+		sender = console:
 			WorldEditNoCommandConsole(console)
 
 on command "//undo" or "/worldedit:/undo":
-	if sender = player:
-		if player doesn't have permission "worldedit.undo" or "worldedit.*":
+	sender = player:
+		player doesn't have permission "worldedit.undo" or "worldedit.*":
 			cancel event
 			WorldEditNoPermission(player)
 
@@ -1129,14 +1057,14 @@ command //redo [<text>]:
 	aliases: worldedit:/redo
 	description: &fWorldedit command //redo.
 	trigger:
-		if sender = player:
+		sender = player:
 			WorldEditCMDRedo(player)
-		if sender = console:
+		sender = console:
 			WorldEditNoCommandConsole(console)
 
 on command "//redo" or "/worldedit:/redo":
-	if sender = player:
-		if player doesn't have permission "worldedit.redo" or "worldedit.*":
+	sender = player:
+		player doesn't have permission "worldedit.redo" or "worldedit.*":
 			cancel event
 			WorldEditNoPermission(player)
 
@@ -1144,17 +1072,17 @@ command //set [<text>]:
 	aliases: worldedit:/set
 	description: &fWorldedit command //set.
 	trigger:
-		if sender = player:
-			if arg 1 isn't set:
+		sender = player:
+			arg 1 isn't set:
 				WorldEditHelp(player, "SetCMD")
 			else:
 				WorldEditCMDSet(player, arg 1)
-		if sender = console:
+		sender = console:
 			WorldEditNoCommandConsole(console)
 
 on command "//set" or "/worldedit:/set":
-	if sender = player:
-		if player doesn't have permission "worldedit.set" or "worldedit.*":
+	sender = player:
+		player doesn't have permission "worldedit.set" or "worldedit.*":
 			cancel event
 			WorldEditNoPermission(player)
 
@@ -1162,17 +1090,17 @@ command //setbiome [<biome>] [<text>]:
 	aliases: worldedit:/setbiome
 	description: &fWorldedit command //setbiome.
 	trigger:
-		if sender = player:
-			if arg 1 isn't set:
+		sender = player:
+			arg 1 isn't set:
 				WorldEditHelp(player, "SetbiomeCMD")
 			else:
 				WorldEditCMDSetbiome(player, arg 1)
-		if sender = console:
+		sender = console:
 			WorldEditNoCommandConsole(console)
 
 on command "//setbiome" or "/worldedit:/setbiome":
-	if sender = player:
-		if player doesn't have permission "worldedit.setbiome" or "worldedit.*":
+	sender = player:
+		player doesn't have permission "worldedit.setbiome" or "worldedit.*":
 			cancel event
 			WorldEditNoPermission(player)
 
@@ -1180,14 +1108,14 @@ command //cut [<text>]:
 	aliases: worldedit:/cut
 	description: &fWorldedit command //cut.
 	trigger:
-		if sender = player:
+		sender = player:
 			WorldEditCMDCut(player)
-		if sender = console:
+		sender = console:
 			WorldEditNoCommandConsole(console)
 
 on command "//cut" or "/worldedit:/cut":
-	if sender = player:
-		if player doesn't have permission "worldedit.cut" or "worldedit.*":
+	sender = player:
+		player doesn't have permission "worldedit.cut" or "worldedit.*":
 			cancel event
 			WorldEditNoPermission(player)
 
@@ -1195,17 +1123,17 @@ command //count [<text>] [<text>]:
 	aliases: worldedit:/count
 	description: &fWorldedit command //count.
 	trigger:
-		if sender = player:
-			if arg 1 isn't set:
+		sender = player:
+			arg 1 isn't set:
 				WorldEditHelp(player, "CountCMD")
 			else:
 				WorldEditCMDCount(player, arg 1)
-		if sender = console:
+		sender = console:
 			WorldEditNoCommandConsole(console)
 
 on command "//count" or "/worldedit:/count":
-	if sender = player:
-		if player doesn't have permission "worldedit.count" or "worldedit.*":
+	sender = player:
+		player doesn't have permission "worldedit.count" or "worldedit.*":
 			cancel event
 			WorldEditNoPermission(player)
 
@@ -1213,14 +1141,14 @@ command //fixwater [<text>]:
 	aliases: worldedit:/fixwater
 	description: &fWorldedit command //fixwater.
 	trigger:
-		if sender = player:
+		sender = player:
 			WorldEditCMDFix(player, "WATER")
-		if sender = console:
+		sender = console:
 			WorldEditNoCommandConsole(console)
 
 on command "//fixwater" or "/worldedit:/fixwater":
-	if sender = player:
-		if player doesn't have permission "worldedit.fixwater" or "worldedit.*":
+	sender = player:
+		player doesn't have permission "worldedit.fixwater" or "worldedit.*":
 			cancel event
 			WorldEditNoPermission(player)
 
@@ -1228,14 +1156,14 @@ command //fixlava [<text>]:
 	aliases: worldedit:/fixlava
 	description: &fWorldedit command //fixlava.
 	trigger:
-		if sender = player:
+		sender = player:
 			WorldEditCMDFix(player, "LAVA")
-		if sender = console:
+		sender = console:
 			WorldEditNoCommandConsole(console)
 
 on command "//fixlava" or "/worldedit:/fixlava":
-	if sender = player:
-		if player doesn't have permission "worldedit.fixlava" or "worldedit.*":
+	sender = player:
+		player doesn't have permission "worldedit.fixlava" or "worldedit.*":
 			cancel event
 			WorldEditNoPermission(player)
 
@@ -1243,14 +1171,14 @@ command //fixfire [<text>]:
 	aliases: worldedit:/fixfire
 	description: &fWorldedit command //fixfire.
 	trigger:
-		if sender = player:
+		sender = player:
 			WorldEditCMDFix(player, "FIRE")
-		if sender = console:
+		sender = console:
 			WorldEditNoCommandConsole(console)
 
 on command "//fixfire" or "/worldedit:/fixfire":
-	if sender = player:
-		if player doesn't have permission "worldedit.fixfire" or "worldedit.*":
+	sender = player:
+		player doesn't have permission "worldedit.fixfire" or "worldedit.*":
 			cancel event
 			WorldEditNoPermission(player)
 
@@ -1258,17 +1186,17 @@ command //thaw [<number>] [<text>]:
 	aliases: worldedit:/thaw
 	description: &fWorldedit command //thaw.
 	trigger:
-		if sender = player:
-			if arg 1 isn't set:
+		sender = player:
+			arg 1 isn't set:
 				WorldEditHelp(player, "ThawCMD")
 			else:
 				WorldEditCMDThaw(player, arg 1)
-		if sender = console:
+		sender = console:
 			WorldEditNoCommandConsole(console)
 
 on command "//thaw" or "/worldedit:/thaw":
-	if sender = player:
-		if player doesn't have permission "worldedit.thaw" or "worldedit.*":
+	sender = player:
+		player doesn't have permission "worldedit.thaw" or "worldedit.*":
 			cancel event
 			WorldEditNoPermission(player)
 
@@ -1276,14 +1204,14 @@ command //extinguish [<text>]:
 	aliases: worldedit:/extinguish, //ext, worldedit:/ext
 	description: &fWorldedit command //extinguish.
 	trigger:
-		if sender = player:
+		sender = player:
 			WorldEditCMDExtinguish(player)
-		if sender = console:
+		sender = console:
 			WorldEditNoCommandConsole(console)
 
 on command "//extinguish" or "/worldedit:/extinguish" or "//ext" or "/worldedit:/ext":
-	if sender = player:
-		if player doesn't have permission "worldedit.extinguish" or "worldedit.*":
+	sender = player:
+		player doesn't have permission "worldedit.extinguish" or "worldedit.*":
 			cancel event
 			WorldEditNoPermission(player)
 
@@ -1291,71 +1219,63 @@ command //tree [<text>] [<text>]:
 	aliases: worldedit:/tree
 	description: &fWorldedit command //extinguish.
 	trigger:
-		if sender = player:
-			if arg 1 isn't set:
+		sender = player:
+			arg 1 isn't set:
 				WorldEditHelp(sender, "TreeCMD")
 			else:
 				load "plugins/WorldEdit/config.yml"
-				if target block != grass or dirt or coarse_dirt:
-					if yaml value "language" from "config" = "English":
+				target block != grass or dirt or coarse_dirt:
+					yaml value "language" from "config" = "English":
 						send "&4| &8x &cYou cannot spawn a tree on this block." to player
-						stop
 				else:
-					if arg 1 != "oak" or "jungle" or "spruce" or "acacia" or "birch" or "darkoak":
-						if yaml value "language" from "config" = "English":
+					arg 1 != "oak" or "jungle" or "spruce" or "acacia" or "birch" or "darkoak":
+						yaml value "language" from "config" = "English":
 							send "&6List of all trees: &cOak &8x &cJungle &8x &cSpruce &8x &cAcacia &8x &cBirch &8x &cDarkoak" to player
-							stop
-					if arg 1 = "oak":
+					arg 1 = "oak":
 						grow oak tree above the targeted block
-						if yaml value "language" from "config" = "English":
+						yaml value "language" from "config" = "English":
 							send "&dYou have spawned a new tree." to player
-							stop
-					if arg 1 = "jungle":
+					arg 1 = "jungle":
 						grow jungle tree above the targeted block
-						if yaml value "language" from "config" = "English":
+						yaml value "language" from "config" = "English":
 							send "&dYou have spawned a new tree." to player
-							stop
-					if arg 1 = "spruce":
+					arg 1 = "spruce":
 						grow spruce tree above the targeted block
-						if yaml value "language" from "config" = "English":
+						yaml value "language" from "config" = "English":
 							send "&dYou have spawned a new tree." to player
-							stop
-					if arg 1 = "acacia":
+					arg 1 = "acacia":
 						grow acacia tree above the targeted block
-						if yaml value "language" from "config" = "English":
+						yaml value "language" from "config" = "English":
 							send "&dYou have spawned a new tree." to player
-							stop
-					if arg 1 = "birch":
+					arg 1 = "birch":
 						grow birch tree above the targeted block
-						if yaml value "language" from "config" = "English":
+						yaml value "language" from "config" = "English":
 							send "&dYou have spawned a new tree." to player
-							stop
-					if arg 1 = "darkoak":
+					arg 1 = "darkoak":
 						grow dark oak tree above the targeted block
-						if yaml value "language" from "config" = "English":
+						yaml value "language" from "config" = "English":
 							send "&dYou have spawned a new tree." to player
-							stop
-		if sender = console:
+		sender = console:
 			WorldEditNoCommandConsole(console)
 
 command //replace [<text>] [<text>]:
 	aliases: worldedit:/replace
 	description: &fWorldedit command //replace.
 	trigger:
-		if sender = player:
-			if arg 1 isn't set:
+		sender = player:
+			arg 1 isn't set:
 				WorldEditHelp(player, "ReplaceCMD")
 			else:
-				if arg 2 isn't set:
+				arg 2 isn't set:
 					WorldEditHelp(player, "ReplaceCMD")
 				else:
 					WorldEditCMDReplace(player, arg 1, arg 2)
-		if sender = console:
+		sender = console:
 			WorldEditNoCommandConsole(console)
 
 on command "//replace" or "/worldedit:/replace":
-	if sender = player:
-		if player doesn't have permission "worldedit.replace" or "worldedit.*":
+	sender = player:
+		player doesn't have permission "worldedit.replace" or "worldedit.*":
 			cancel event
 			WorldEditNoPermission(player)
 
@@ -1363,20 +1283,20 @@ command //sphere [<integer>] [<text>]:
 	aliases: worldedit:/sphere
 	description: &fWorldedit command //sphere.
 	trigger:
-		if sender = player:
-			if arg 1 isn't set:
+		sender = player:
+			arg 1 isn't set:
 				WorldEditHelp(player, "SphereCMD")
 			else:
-				if arg 2 isn't set:
+				arg 2 isn't set:
 					WorldEditHelp(player, "SphereCMD")
 				else:
 					WorldEditCMDSphere(player, arg 1, arg 2)
-		if sender = console:
+		sender = console:
 			WorldEditNoCommandConsole(console)
 
 on command "//sphere" or "/worldedit:/sphere":
-	if sender = player:
-		if player doesn't have permission "worldedit.sphere" or "worldedit.*":
+	sender = player:
+		player doesn't have permission "worldedit.sphere" or "worldedit.*":
 			cancel event
 			WorldEditNoPermission(player)
 
@@ -1384,20 +1304,20 @@ command //hsphere [<integer>] [<text>]:
 	aliases: worldedit:/hsphere
 	description: &fWorldedit command //hsphere.
 	trigger:
-		if sender = player:
-			if arg 1 isn't set:
+		sender = player:
+			arg 1 isn't set:
 				WorldEditHelp(player, "HsphereCMD")
 			else:
-				if arg 2 isn't set:
+				arg 2 isn't set:
 					WorldEditHelp(player, "HsphereCMD")
 				else:
 					WorldEditCMDHsphere(player, arg 1, arg 2)
-		if sender = console:
+		sender = console:
 			WorldEditNoCommandConsole(console)
 
 on command "//hsphere" or "/worldedit:/hsphere":
-	if sender = player:
-		if player doesn't have permission "worldedit.hsphere" or "worldedit.*":
+	sender = player:
+		player doesn't have permission "worldedit.hsphere" or "worldedit.*":
 			cancel event
 			WorldEditNoPermission(player)
 
@@ -1405,14 +1325,14 @@ command //superpickaxe [<text>]:
 	aliases: worldedit:/superpickaxe
 	description: &fWorldedit command //superpickaxe.
 	trigger:
-		if sender = player:
+		sender = player:
 			WorldEditCMDSuperpickaxe(player)
-		if sender = console:
+		sender = console:
 			WorldEditNoCommandConsole(console)
 
 on command "//superpickaxe" or "/worldedit:/superpickaxe":
-	if sender = player:
-		if player doesn't have permission "worldedit.superpickaxe" or "worldedit.*":
+	sender = player:
+		player doesn't have permission "worldedit.superpickaxe" or "worldedit.*":
 			cancel event
 			WorldEditNoPermission(player)
 
@@ -1420,17 +1340,17 @@ command //walls [<text>]:
 	aliases: worldedit:/walls
 	description: &fWorldedit command //walls.
 	trigger:
-		if sender = player:
-			if arg 1 isn't set:
+		sender = player:
+			arg 1 isn't set:
 				WorldEditHelp(player, "WallsCMD")
 			else:
 				WorldEditCMDWalls(player, arg 1)
-		if sender = console:
+		sender = console:
 			WorldEditNoCommandConsole(console)
 
 on command "//walls" or "/worldedit:/walls":
-	if sender = player:
-		if player doesn't have permission "worldedit.walls" or "worldedit.*":
+	sender = player:
+		player doesn't have permission "worldedit.walls" or "worldedit.*":
 			cancel event
 			WorldEditNoPermission(player)
 
@@ -1438,17 +1358,17 @@ command //faces [<text>]:
 	aliases: worldedit:/faces
 	description: &fWorldedit command //faces.
 	trigger:
-		if sender = player:
-			if arg 1 isn't set:
+		sender = player:
+			arg 1 isn't set:
 				WorldEditHelp(player, "FacesCMD")
 			else:
 				WorldEditCMDFaces(player, arg 1)
-		if sender = console:
+		sender = console:
 			WorldEditNoCommandConsole(console)
 
 on command "//faces" or "/worldedit:/faces":
-	if sender = player:
-		if player doesn't have permission "worldedit.faces" or "worldedit.*":
+	sender = player:
+		player doesn't have permission "worldedit.faces" or "worldedit.*":
 			cancel event
 			WorldEditNoPermission(player)
 
@@ -1456,17 +1376,17 @@ command //overlay [<text>]:
 	aliases: worldedit:/overlay
 	description: &fWorldedit command //overlay.
 	trigger:
-		if sender = player:
-			if arg 1 isn't set:
+		sender = player:
+			arg 1 isn't set:
 				WorldEditHelp(player, "OverlayCMD")
 			else:
 				WorldEditCMDOverlay(player, arg 1)
-		if sender = console:
+		sender = console:
 			WorldEditNoCommandConsole(console)
 
 on command "//overlay" or "/worldedit:/overlay":
-	if sender = player:
-		if player doesn't have permission "worldedit.overlay" or "worldedit.*":
+	sender = player:
+		player doesn't have permission "worldedit.overlay" or "worldedit.*":
 			cancel event
 			WorldEditNoPermission(player)
 
@@ -1474,20 +1394,20 @@ command //cyl [<integer>] [<text>]:
 	aliases: worldedit:/cyl, //cylinder, worldedit:/cylinder
 	description: &fWorldedit command //cyl.
 	trigger:
-		if sender = player:
-			if arg 1 isn't set:
+		sender = player:
+			arg 1 isn't set:
 				WorldEditHelp(player, "CylCMD")
 			else:
-				if arg 2 isn't set:
+				arg 2 isn't set:
 					WorldEditHelp(player, "CylCMD")
 				else:
 					WorldEditCMDCyl(player, arg 1, arg 2)
-		if sender = console:
+		sender = console:
 			WorldEditNoCommandConsole(console)
 
 on command "//cyl" or "/worldedit:/cyl" or "//cylinder" or "/worldedit:/cycylinder":
-	if sender = player:
-		if player doesn't have permission "worldedit.cyl" or "worldedit.*":
+	sender = player:
+		player doesn't have permission "worldedit.cyl" or "worldedit.*":
 			cancel event
 			WorldEditNoPermission(player)
 
@@ -1495,16 +1415,16 @@ command //down [<integer>] [<text>]:
 	aliases: worldedit:/down
 	description: &fWorldedit command //down.
 	trigger:
-		if sender = player:
-			if arg 1 isn't set:
+		sender = player:
+			arg 1 isn't set:
 				WorldEditHelp(player, "DownCMD")
 			else:
 				WorldEditCMDDown(player, arg 1)
-		if sender = console:
+		sender = console:
 			WorldEditNoCommandConsole(console)
 
 on command "//down" or "/worldedit:/down":
-	if sender = player:
-		if player doesn't have permission "worldedit.down" or "worldedit.*":
+	sender = player:
+		player doesn't have permission "worldedit.down" or "worldedit.*":
 			cancel event
 			WorldEditNoPermission(player)
