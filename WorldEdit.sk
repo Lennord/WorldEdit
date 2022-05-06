@@ -867,7 +867,7 @@ command /worldedit [<text>] [<text>]:
 					send "&8| &fName of skript: &cWorldEdit (Skript)" to sender
 					send "&8| &fAuthor of skript: &calexisl315 (Alias: Lennord)" to sender
 					send "&8| &fDescription of skript: &cThis skript allows you to redo all or almost all the functionality of the WorldEdit and FastAsyncWorldEdit plugin." to sender
-					send "&8| &fVersion of skript: &c2.0.3" to sender
+					send "&8| &fVersion of skript: &c2.0.4" to sender
 					send "&8| &fPlugin requirements: &cSkript&7, &cSkript-YAML &7and &cSkellett" to sender
 					send "&8| &fAll languages of skript: &cEnglish" to sender
 					send "" to sender
