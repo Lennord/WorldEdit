@@ -500,7 +500,7 @@ function WorldEditCMDFix(s: sender, itemtype: text):
 				loop blocks within yaml value "wand.pos1.location" from "who" and yaml value "wand.pos2.location" from "who":
 					loop-block is a air:
 						block under the loop-block is not a air:
-							set loop-value to fire
+							set loop-value to minecraft:fire
 				yaml value "language" from "config" = "English":
 					send "&dYou have set &c%amount of blocks within yaml value "wand.pos1.location" from "who" and yaml value "wand.pos2.location" from "who"% &dblocks." to {_s}
 				save yaml "who"
