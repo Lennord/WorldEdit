@@ -160,6 +160,12 @@ function WorldEditHelp(s: sender, typehelp: text):
 			send "" to {_s}
 			send "&8| &f//down &7[&cnumber&7] &8x &7Teleport at location down." to {_s}
 			send "" to {_s}
+		{_typehelp} = "ButcherCMD":
+			send "" to {_s}
+			send "&8| &8x &6Help:" to {_s}
+			send "" to {_s}
+			send "&8| &f//butcher &7[&cnumber&7] &8x &7Clear all entitys in player's radius." to {_s}
+			send "" to {_s}
 
 function WorldEditCMDToggleeditwand(s: sender):
 	load "plugins/WorldEdit/config.yml"
@@ -778,6 +784,14 @@ function WorldEditCMDCyl(s: sender, n: number, itemtype: text):
 		yaml value "language" from "config" = "English":
 			send "&dYou have spawn a cylinder at your location." to {_s}
 		delete {WorldEdit::%{_s}'s uuid%::cyl::*}
+
+function WorldEditCMDButcher(s: sender, n: number):
+	load "plugins/WorldEdit/config.yml"
+	loop all entities in radius {_n} of {_s}:
+		loop-value != player:
+			kill loop-value
+	yaml value "language" from "config" = "English":
+		send "&dYou have cleared all entitys at your location radius." to {_s}
 
 on break:
 	load "plugins/WorldEdit/players/%player%/who.yml"
@@ -1432,5 +1446,23 @@ command //down [<integer>] [<text>]:
 on command "//down" or "/worldedit:/down":
 	sender = player:
 		player doesn't have permission "worldedit.down" or "worldedit.*":
+			cancel event
+			WorldEditNoPermission(player)
+
+command //butcher [<integer>] [<text>]:
+	aliases: worldedit:/butcher
+	description: &fWorldedit command //butcher.
+	trigger:
+		sender = player:
+			arg 1 isn't set:
+				WorldEditHelp(player, "ButcherCMD")
+			else:
+				WorldEditCMDButcher(player, arg 1)
+		sender = console:
+			WorldEditNoCommandConsole(console)
+
+on command "//butcher" or "/worldedit:/butcher":
+	sender = player:
+		player doesn't have permission "worldedit.butcher" or "worldedit.*":
 			cancel event
 			WorldEditNoPermission(player)
