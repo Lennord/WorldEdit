@@ -32,6 +32,12 @@ on load:
 		unload yaml "config"
 		stop
 
+on damage:
+	attacker = player:
+		load "plugins/WorldEdit/config.yml"
+		attacker's tool = yaml value "wand.item-type" from "config" named "&c&l↪ &7Wand of WorldEdit":
+			cancel event
+
 on load:
 	send "&7[&bWorldEdit&7] &8x &2Enabled" to console
 
