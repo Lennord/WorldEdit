@@ -1,8 +1,3 @@
-#   . WorldEdit (Skript), Developped by alexisl315 (Alias: Lennord).
-#   . This skript allows you to redo all or almost all the functionality of the WorldEdit and FastAsyncWorldEdit plugin.
-
-#   --> Code:
-
 on join:
 	yaml file "plugins/WorldEdit/players/%player%/who.yml" doesn't exist:
 		load "plugins/WorldEdit/players/%player%/who.yml"
@@ -13,7 +8,6 @@ on join:
 		set yaml value "redo.numbers" from "who" to 0
 		save yaml "who"
 		unload yaml "who"
-		stop
 
 on load:
 	yaml file "plugins/WorldEdit/config.yml" doesn't exist:
@@ -29,17 +23,14 @@ on load:
 		yaml value "language" from "config" != "English":
 			set yaml value "language" from "config" to "English"
 		save yaml "config"
-		unload yaml "config"
-		stop
+	unload yaml "config"
+	send "&7[&bWorldEdit&7] &8x &2Enabled" to console
 
 on damage:
 	attacker = player:
 		load "plugins/WorldEdit/config.yml"
 		attacker's tool = yaml value "wand.item-type" from "config" named "&c&l↪ &7Wand of WorldEdit":
 			cancel event
-
-on load:
-	send "&7[&bWorldEdit&7] &8x &2Enabled" to console
 
 on unload:
 	send "&7[&bWorldEdit&7] &8x &cDisabled" to console
@@ -57,115 +48,47 @@ function WorldEditNoCommandConsole(s: sender):
 function WorldEditHelp(s: sender, typehelp: text):
 	load "plugins/WorldEdit/config.yml"
 	yaml value "language" from "config" = "English":
+		send "" to {_s}
+		send "&8| &8x &6Help:" to {_s}
+		send "" to {_s}
 		{_typehelp} = "WorldEditCMD":
-			send "" to {_s}
-			send "&8| &8x &6Help:" to {_s}
-			send "" to {_s}
 			send "&8| &f/worldedit &binfo &8x &7Seen informations of this skript." to {_s}
 			send "&8| &f/worldedit &breload &8x &7Reload this skript." to {_s}
-			send "" to {_s}
 		{_typehelp} = "UpCMD":
-			send "" to {_s}
-			send "&8| &8x &6Help:" to {_s}
-			send "" to {_s}
 			send "&8| &f//up &7[&cnumber&7] &8x &7Teleport at location up." to {_s}
-			send "" to {_s}
 		{_typehelp} = "PosCMD":
-			send "" to {_s}
-			send "&8| &8x &6Help:" to {_s}
-			send "" to {_s}
 			send "&8| &f//pos &7[&c1 &for &c2&7] &8x &7Set position at your location." to {_s}
-			send "" to {_s}
 		{_typehelp} = "HposCMD":
-			send "" to {_s}
-			send "&8| &8x &6Help:" to {_s}
-			send "" to {_s}
 			send "&8| &f//hpos &7[&c1 &for &c2&7] &8x &7Set position at your targeted's block." to {_s}
-			send "" to {_s}
 		{_typehelp} = "SetCMD":
-			send "" to {_s}
-			send "&8| &8x &6Help:" to {_s}
-			send "" to {_s}
 			send "&8| &f//set &7[&citem type&7] &8x &7Set block type." to {_s}
-			send "" to {_s}
 		{_typehelp} = "SetbiomeCMD":
-			send "" to {_s}
-			send "&8| &8x &6Help:" to {_s}
-			send "" to {_s}
 			send "&8| &f//setbiome &7[&cbiome type&7] &8x &7Set biome type." to {_s}
-			send "" to {_s}
 		{_typehelp} = "CountCMD":
-			send "" to {_s}
-			send "&8| &8x &6Help:" to {_s}
-			send "" to {_s}
 			send "&8| &f//count &7[&citem type&7] &8x &7Count of the block type." to {_s}
-			send "" to {_s}
 		{_typehelp} = "ThawCMD":
-			send "" to {_s}
-			send "&8| &8x &6Help:" to {_s}
-			send "" to {_s}
 			send "&8| &f//thaw &7[&cradius&7] &8x &7Delete all snows blocks." to {_s}
-			send "" to {_s}
 		{_typehelp} = "TreeCMD":
-			send "" to {_s}
-			send "&8| &8x &6Help:" to {_s}
-			send "" to {_s}
 			send "&8| &f//tree &7[&cname of tree&7] &8x &7Spawn the tree type." to {_s}
-			send "" to {_s}
 		{_typehelp} = "ReplaceCMD":
-			send "" to {_s}
-			send "&8| &8x &6Help:" to {_s}
-			send "" to {_s}
 			send "&8| &f//replace &7[&cname of block replace&7] &7[&cname of block&7] &8x &7Replace block type to block type." to {_s}
-			send "" to {_s}
 		{_typehelp} = "SphereCMD":
-			send "" to {_s}
-			send "&8| &8x &6Help:" to {_s}
-			send "" to {_s}
 			send "&8| &f//sphere &7[&cradius&7] &7[&cname of block&7] &8x &7Spawn sphere at your location." to {_s}
-			send "" to {_s}
 		{_typehelp} = "HsphereCMD":
-			send "" to {_s}
-			send "&8| &8x &6Help:" to {_s}
-			send "" to {_s}
 			send "&8| &f//hsphere &7[&cradius&7] &7[&cname of block&7] &8x &7Spawn sphere at your location of target's block." to {_s}
-			send "" to {_s}
 		{_typehelp} = "WallsCMD":
-			send "" to {_s}
-			send "&8| &8x &6Help:" to {_s}
-			send "" to {_s}
 			send "&8| &f//walls &7[&cname of block&7] &8x &7Set walls of block type." to {_s}
-			send "" to {_s}
 		{_typehelp} = "FacesCMD":
-			send "" to {_s}
-			send "&8| &8x &6Help:" to {_s}
-			send "" to {_s}
 			send "&8| &f//faces &7[&cname of block&7] &8x &7Set faces of block type." to {_s}
-			send "" to {_s}
 		{_typehelp} = "OverlayCMD":
-			send "" to {_s}
-			send "&8| &8x &6Help:" to {_s}
-			send "" to {_s}
 			send "&8| &f//overlay &7[&cname of block&7] &8x &7Set overlay of block type." to {_s}
-			send "" to {_s}
 		{_typehelp} = "CylCMD":
-			send "" to {_s}
-			send "&8| &8x &6Help:" to {_s}
-			send "" to {_s}
 			send "&8| &f//cyl &7[&cradius&7] &7[&cname of block&7] &8x &7Spawn cylinder at your location." to {_s}
-			send "" to {_s}
 		{_typehelp} = "DownCMD":
-			send "" to {_s}
-			send "&8| &8x &6Help:" to {_s}
-			send "" to {_s}
 			send "&8| &f//down &7[&cnumber&7] &8x &7Teleport at location down." to {_s}
-			send "" to {_s}
 		{_typehelp} = "ButcherCMD":
-			send "" to {_s}
-			send "&8| &8x &6Help:" to {_s}
-			send "" to {_s}
 			send "&8| &f//butcher &7[&cnumber&7] &8x &7Clear all entitys in player's radius." to {_s}
-			send "" to {_s}
+		send "" to {_s}
 
 function WorldEditCMDToggleeditwand(s: sender):
 	load "plugins/WorldEdit/config.yml"
@@ -174,15 +97,13 @@ function WorldEditCMDToggleeditwand(s: sender):
 		yaml value "language" from "config" = "English":
 			send "&7You have been enabled to worldedit wand." to {_s}
 		save yaml "config"
-		unload yaml "config"
 		stop
 	else:
 		set yaml value "wand.stats" from "config" to false
 		yaml value "language" from "config" = "English":
 			send "&7You have been disabled to worldedit wand." to {_s}
 		save yaml "config"
-		unload yaml "config"
-		stop
+	unload yaml "config"
 
 function WorldEditCMDWand(s: sender):
 	load "plugins/WorldEdit/config.yml"
@@ -195,12 +116,12 @@ function WorldEditCMDWand(s: sender):
 			send "&7You have gived to wand of WorldEdit." to {_s}
 
 function WorldEditCMDDeselect(s: sender):
-	load "plugins/WorldEdit/config.yml"
 	load "plugins/WorldEdit/players/%{_s}%/who.yml"
 	yaml value "wand.stats" from "who" = true:
 		set yaml value "wand.stats" from "who" to false
 		delete yaml value "wand.pos1" from "who"
 		delete yaml value "wand.pos2" from "who"
+		load "plugins/WorldEdit/config.yml"
 		yaml value "language" from "config" = "English":
 			send "&7You have reset your wand of WorldEdit." to {_s}
 		save yaml "who"
@@ -249,7 +170,6 @@ function WorldEditCMDPos(s: sender, positiontype: text):
 				send "&dYou have created position 1. &d(&dx: &c%x-location of {_s}%&d, y: &c%y-location of {_s}%&d, z: &c%z-location of {_s}%&d) (&c%amount of blocks within yaml value "wand.pos1.location" from "who" and yaml value "wand.pos2.location" from "who"%&d)" to {_s}
 		save yaml "who"
 		unload yaml "who"
-		stop
 	{_positiontype} = "2":
 		set yaml value "wand.stats" from "who" to true
 		set yaml value "wand.pos2.stats" from "who" to true
@@ -261,7 +181,6 @@ function WorldEditCMDPos(s: sender, positiontype: text):
 				send "&dYou have created position 2. &d(&dx: &c%x-location of {_s}%&d, y: &c%y-location of {_s}%&d, z: &c%z-location of {_s}%&d) (&c%amount of blocks within yaml value "wand.pos1.location" from "who" and yaml value "wand.pos2.location" from "who"%&d)" to {_s}
 		save yaml "who"
 		unload yaml "who"
-		stop
 
 function WorldEditCMDHpos(s: sender, positiontype: text):
 	targeted block of {_s} isn't set:
@@ -280,7 +199,6 @@ function WorldEditCMDHpos(s: sender, positiontype: text):
 					send "&dYou have created position 1. &d(&dx: &c%x-location of targeted block of {_s}%&d, y: &c%y-location of targeted block of {_s}%&d, z: &c%z-location of targeted block of {_s}%&d) (&c%amount of blocks within yaml value "wand.pos1.location" from "who" and yaml value "wand.pos2.location" from "who"%&d)" to {_s}
 			save yaml "who"
 			unload yaml "who"
-			stop
 		{_positiontype} = "2":
 			set yaml value "wand.stats" from "who" to true
 			set yaml value "wand.pos2.stats" from "who" to true
@@ -292,7 +210,6 @@ function WorldEditCMDHpos(s: sender, positiontype: text):
 					send "&dYou have created position 2. &d(&dx: &c%x-location of targeted block of {_s}%&d, y: &c%y-location of targeted block of {_s}%&d, z: &c%z-location of targeted block of {_s}%&d) (&c%amount of blocks within yaml value "wand.pos1.location" from "who" and yaml value "wand.pos2.location" from "who"%&d)" to {_s}
 			save yaml "who"
 			unload yaml "who"
-			stop
 
 function WorldEditCMDDelchunk(s: sender):
 	load "plugins/WorldEdit/config.yml"
@@ -306,7 +223,6 @@ function WorldEditCMDDelchunk(s: sender):
 		send "&dYou have remove your chunk." to {_s}
 	save yaml "who"
 	unload yaml "who"
-	stop
 
 function WorldEditCMDHdelchunk(s: sender):
 	targeted block of {_s} isn't set:
@@ -323,7 +239,6 @@ function WorldEditCMDHdelchunk(s: sender):
 			send "&dYou have remove your chunk." to {_s}
 		save yaml "who"
 		unload yaml "who"
-		stop
 
 function WorldEditCMDUndo(s: sender):
 	load "plugins/WorldEdit/config.yml"
@@ -347,7 +262,6 @@ function WorldEditCMDUndo(s: sender):
 			send "&dYou have gone back." to {_s}
 		save yaml "who"
 		unload yaml "who"
-		stop
 
 function WorldEditCMDRedo(s: sender):
 	load "plugins/WorldEdit/config.yml"
@@ -372,7 +286,6 @@ function WorldEditCMDRedo(s: sender):
 			send "&dYou have gone back." to {_s}
 		save yaml "who"
 		unload yaml "who"
-		stop
 
 function WorldEditCMDSet(s: sender, itemtype: text):
 	load "plugins/WorldEdit/config.yml"
@@ -405,7 +318,6 @@ function WorldEditCMDSet(s: sender, itemtype: text):
 			save yaml "who"
 			unload yaml "who"
 			delete {WorldEdit::%{_s}'s uuid%::setblock::randomblock}
-			stop
 
 function WorldEditCMDSetbiome(s: sender, biometype: biome):
 	load "plugins/WorldEdit/config.yml"
@@ -443,7 +355,6 @@ function WorldEditCMDCut(s: sender):
 				send "&dYou have set &c%amount of blocks within yaml value "wand.pos1.location" from "who" and yaml value "wand.pos2.location" from "who"% &dblocks." to {_s}
 			save yaml "who"
 			unload yaml "who"
-			stop
 
 function WorldEditCMDCount(s: sender, itemtype: text):
 	load "plugins/WorldEdit/config.yml"
@@ -517,7 +428,6 @@ function WorldEditCMDFix(s: sender, itemtype: text):
 					send "&dYou have set &c%amount of blocks within yaml value "wand.pos1.location" from "who" and yaml value "wand.pos2.location" from "who"% &dblocks." to {_s}
 				save yaml "who"
 				unload yaml "who"
-				stop
 
 function WorldEditCMDThaw(s: sender, n: number):
 	load "plugins/WorldEdit/config.yml"
@@ -641,7 +551,6 @@ function WorldEditCMDSuperpickaxe(s: sender):
 		save yaml "who"
 		unload yaml "who"
 	delete {WorldEdit::%{_s}'s uuid%::sphere::randomblock}
-	stop
 
 function WorldEditCMDWalls(s: sender, itemtype: text):
 	load "plugins/WorldEdit/config.yml"
@@ -683,7 +592,6 @@ function WorldEditCMDWalls(s: sender, itemtype: text):
 			save yaml "who"
 			unload yaml "who"
 			delete {WorldEdit::%{_s}'s uuid%::walls::*}
-			stop
 
 function WorldEditCMDFaces(s: sender, itemtype: text):
 	load "plugins/WorldEdit/config.yml"
@@ -731,7 +639,6 @@ function WorldEditCMDFaces(s: sender, itemtype: text):
 			save yaml "who"
 			unload yaml "who"
 			delete {WorldEdit::%{_s}'s uuid%::faces::*}
-			stop
 
 function WorldEditCMDOverlay(s: sender, itemtype: text):
 	load "plugins/WorldEdit/config.yml"
@@ -765,7 +672,6 @@ function WorldEditCMDOverlay(s: sender, itemtype: text):
 			save yaml "who"
 			unload yaml "who"
 			delete {WorldEdit::%{_s}'s uuid%::overlay::*}
-			stop
 
 function WorldEditCMDCyl(s: sender, n: number, itemtype: text):
 	load "plugins/WorldEdit/config.yml"
@@ -801,7 +707,6 @@ on break:
 				clear drops
 				set event-block to air
 				drop event-block at location of event-block
-				stop
 
 on right click:
 	player has permission "worldedit.wand.rightclick" or "worldedit.wand.*" or "worldedit.*":
@@ -824,7 +729,6 @@ on right click:
 							send "&dYou have created position 2. &d(&dx: &c%x-location of clicked block%&d, y: &c%y-location of clicked block%&d, z: &c%z-location of clicked block%&d) (&c%amount of blocks within yaml value "wand.pos1.location" from "who" and yaml value "wand.pos2.location" from "who"%&d)" to player
 					save yaml "who"
 					unload yaml "who"
-					stop
 
 on left click:
 	player has permission "worldedit.wand.leftclick" or "worldedit.wand.*" or "worldedit.*":
@@ -847,7 +751,6 @@ on left click:
 							send "&dYou have created position 1. &d(&dx: &c%x-location of clicked block%&d, y: &c%y-location of clicked block%&d, z: &c%z-location of clicked block%&d) (&c%amount of blocks within yaml value "wand.pos1.location" from "who" and yaml value "wand.pos2.location" from "who"%&d)" to player
 					save yaml "who"
 					unload yaml "who"
-					stop
 
 function WorldEditCMDDown(s: sender, n: integer):
 	y coordinate of location at {_s} - {_n} <= -64:
@@ -885,7 +788,7 @@ command /worldedit [<text>] [<text>]:
 					send "&8| &8x &6Help:" to sender
 					send "" to sender
 					send "&8| &fName of skript: &cWorldEdit (Skript)" to sender
-					send "&8| &fAuthor of skript: &calexisl315 (Alias: Lennord)" to sender
+					send "&8| &fAuthor of skript: &cAlexisl315 (Alias: Lennord)" to sender
 					send "&8| &fDescription of skript: &cThis skript allows you to redo all or almost all the functionality of the WorldEdit and FastAsyncWorldEdit plugin." to sender
 					send "&8| &fVersion of skript: &c2.0.6" to sender
 					send "&8| &fPlugin requirements: &cSkript&7, &cSkript-YAML &7and &cSkellett" to sender
@@ -897,12 +800,6 @@ command /worldedit [<text>] [<text>]:
 				yaml value "language" from "config" = "English":
 					send "&7You have been reloaded this skript." to sender
 
-on command "/worldedit" or "/worldedit:worldedit" or "/we" or "/worldedit:we":
-	sender = player:
-		player doesn't have permission "worldedit.worldedit" or "worldedit.*":
-			cancel event
-			WorldEditNoPermission(player)
-
 command //toggleeditwand [<text>]:
 	aliases: worldedit:/toggleeditwand
 	description: &fworldedit command /toggleeditwand.
@@ -911,12 +808,6 @@ command //toggleeditwand [<text>]:
 			WorldEditCMDToggleeditwand(player)
 		sender = console:
 			WorldEditNoCommandConsole(console)
-
-on command "//toggleeditwand" or "/worldedit:/toggleeditwand":
-	sender = player:
-		player doesn't have permission "worldedit.toggleeditwand" or "worldedit.*":
-			cancel event
-			WorldEditNoPermission(player)
 
 command //wand [<text>]:
 	executable by: player and console
@@ -928,12 +819,6 @@ command //wand [<text>]:
 		sender = console:
 			WorldEditNoCommandConsole(console)
 
-on command "//wand" or "/worldedit:/wand":
-	sender = player:
-		player doesn't have permission "worldedit.toggleeditwand" or "worldedit.*":
-			cancel event
-			WorldEditNoPermission(player)
-
 command //deselect [<text>]:
 	aliases: worldedit:/deselect, //desel, worldedit:/desel, //deselection, worldedit:/deselection
 	description: &fWorldedit command //deselect.
@@ -942,12 +827,6 @@ command //deselect [<text>]:
 			WorldEditCMDDeselect(player)
 		sender = console:
 			WorldEditNoCommandConsole(console)
-
-on command "//deselect" or "/worldedit:/deselect" or "//desel" or "/worldedit:/desel"  or "//deselection" or "/worldedit:/deselection":
-	sender = player:
-		player doesn't have permission "worldedit.deselect" or "worldedit.*":
-			cancel event
-			WorldEditNoPermission(player)
 
 command //up [<integer>] [<text>]:
 	aliases: worldedit:/up
@@ -961,12 +840,6 @@ command //up [<integer>] [<text>]:
 		sender = console:
 			WorldEditNoCommandConsole(console)
 
-on command "//up" or "/worldedit:/up":
-	sender = player:
-		player doesn't have permission "worldedit.up" or "worldedit.*":
-			cancel event
-			WorldEditNoPermission(player)
-
 command //size [<text>]:
 	aliases: worldedit:/size
 	description: &fWorldedit command //size.
@@ -975,12 +848,6 @@ command //size [<text>]:
 			WorldEditCMDSize(player)
 		sender = console:
 			WorldEditNoCommandConsole(console)
-
-on command "//size" or "/worldedit:/size":
-	sender = player:
-		player doesn't have permission "worldedit.size" or "worldedit.*":
-			cancel event
-			WorldEditNoPermission(player)
 
 command //pos [<text>] [<text>]:
 	aliases: worldedit:/pos, //position, worldedit:/position
@@ -999,12 +866,6 @@ command //pos [<text>] [<text>]:
 		sender = console:
 			WorldEditNoCommandConsole(console)
 
-on command "//pos" or "/worldedit:/pos" or "//position" or "/worldedit:/position":
-	sender = player:
-		player doesn't have permission "worldedit.position" or "worldedit.*":
-			cancel event
-			WorldEditNoPermission(player)
-
 command //hpos [<text>] [<text>]:
 	aliases: worldedit:/hpos, //hposition, worldedit:/hposition
 	description: &fWorldedit command //hpos.
@@ -1022,12 +883,6 @@ command //hpos [<text>] [<text>]:
 		sender = console:
 			WorldEditNoCommandConsole(console)
 
-on command "//hpos" or "/worldedit:/hpos" or "//hposition" or "/worldedit:/hposition":
-	sender = player:
-		player doesn't have permission "worldedit.hposition" or "worldedit.*":
-			cancel event
-			WorldEditNoPermission(player)
-
 command //delchunk [<text>]:
 	aliases: worldedit:/delchunk, //deletechunk, worldedit:/deletechunk
 	description: &fWorldedit command //delchunk.
@@ -1036,12 +891,6 @@ command //delchunk [<text>]:
 			WorldEditCMDDelchunk(player)
 		sender = console:
 			WorldEditNoCommandConsole(console)
-
-on command "//delchunk" or "/worldedit:/delchunk" or "//deletechunk" or "/worldedit:/deletechunk":
-	sender = player:
-		player doesn't have permission "worldedit.delchunk" or "worldedit.*":
-			cancel event
-			WorldEditNoPermission(player)
 
 command //hdelchunk [<text>]:
 	aliases: worldedit:/hdelchunk, //hdeletechunk, worldedit:/hdeletechunk
@@ -1052,12 +901,6 @@ command //hdelchunk [<text>]:
 		sender = console:
 			WorldEditNoCommandConsole(console)
 
-on command "//hdelchunk" or "/worldedit:/hdelchunk" or "//hdeletechunk" or "/worldedit:/hdeletechunk":
-	sender = player:
-		player doesn't have permission "worldedit.hdelchunk" or "worldedit.*":
-			cancel event
-			WorldEditNoPermission(player)
-
 command //undo [<text>]:
 	aliases: worldedit:/undo
 	description: &fWorldedit command //undo.
@@ -1067,12 +910,6 @@ command //undo [<text>]:
 		sender = console:
 			WorldEditNoCommandConsole(console)
 
-on command "//undo" or "/worldedit:/undo":
-	sender = player:
-		player doesn't have permission "worldedit.undo" or "worldedit.*":
-			cancel event
-			WorldEditNoPermission(player)
-
 command //redo [<text>]:
 	aliases: worldedit:/redo
 	description: &fWorldedit command //redo.
@@ -1081,12 +918,6 @@ command //redo [<text>]:
 			WorldEditCMDRedo(player)
 		sender = console:
 			WorldEditNoCommandConsole(console)
-
-on command "//redo" or "/worldedit:/redo":
-	sender = player:
-		player doesn't have permission "worldedit.redo" or "worldedit.*":
-			cancel event
-			WorldEditNoPermission(player)
 
 command //set [<text>]:
 	aliases: worldedit:/set
@@ -1100,12 +931,6 @@ command //set [<text>]:
 		sender = console:
 			WorldEditNoCommandConsole(console)
 
-on command "//set" or "/worldedit:/set":
-	sender = player:
-		player doesn't have permission "worldedit.set" or "worldedit.*":
-			cancel event
-			WorldEditNoPermission(player)
-
 command //setbiome [<biome>] [<text>]:
 	aliases: worldedit:/setbiome
 	description: &fWorldedit command //setbiome.
@@ -1118,12 +943,6 @@ command //setbiome [<biome>] [<text>]:
 		sender = console:
 			WorldEditNoCommandConsole(console)
 
-on command "//setbiome" or "/worldedit:/setbiome":
-	sender = player:
-		player doesn't have permission "worldedit.setbiome" or "worldedit.*":
-			cancel event
-			WorldEditNoPermission(player)
-
 command //cut [<text>]:
 	aliases: worldedit:/cut
 	description: &fWorldedit command //cut.
@@ -1132,12 +951,6 @@ command //cut [<text>]:
 			WorldEditCMDCut(player)
 		sender = console:
 			WorldEditNoCommandConsole(console)
-
-on command "//cut" or "/worldedit:/cut":
-	sender = player:
-		player doesn't have permission "worldedit.cut" or "worldedit.*":
-			cancel event
-			WorldEditNoPermission(player)
 
 command //count [<text>] [<text>]:
 	aliases: worldedit:/count
@@ -1151,12 +964,6 @@ command //count [<text>] [<text>]:
 		sender = console:
 			WorldEditNoCommandConsole(console)
 
-on command "//count" or "/worldedit:/count":
-	sender = player:
-		player doesn't have permission "worldedit.count" or "worldedit.*":
-			cancel event
-			WorldEditNoPermission(player)
-
 command //fixwater [<text>]:
 	aliases: worldedit:/fixwater
 	description: &fWorldedit command //fixwater.
@@ -1165,12 +972,6 @@ command //fixwater [<text>]:
 			WorldEditCMDFix(player, "WATER")
 		sender = console:
 			WorldEditNoCommandConsole(console)
-
-on command "//fixwater" or "/worldedit:/fixwater":
-	sender = player:
-		player doesn't have permission "worldedit.fixwater" or "worldedit.*":
-			cancel event
-			WorldEditNoPermission(player)
 
 command //fixlava [<text>]:
 	aliases: worldedit:/fixlava
@@ -1181,12 +982,6 @@ command //fixlava [<text>]:
 		sender = console:
 			WorldEditNoCommandConsole(console)
 
-on command "//fixlava" or "/worldedit:/fixlava":
-	sender = player:
-		player doesn't have permission "worldedit.fixlava" or "worldedit.*":
-			cancel event
-			WorldEditNoPermission(player)
-
 command //fixfire [<text>]:
 	aliases: worldedit:/fixfire
 	description: &fWorldedit command //fixfire.
@@ -1195,12 +990,6 @@ command //fixfire [<text>]:
 			WorldEditCMDFix(player, "FIRE")
 		sender = console:
 			WorldEditNoCommandConsole(console)
-
-on command "//fixfire" or "/worldedit:/fixfire":
-	sender = player:
-		player doesn't have permission "worldedit.fixfire" or "worldedit.*":
-			cancel event
-			WorldEditNoPermission(player)
 
 command //thaw [<number>] [<text>]:
 	aliases: worldedit:/thaw
@@ -1214,12 +1003,6 @@ command //thaw [<number>] [<text>]:
 		sender = console:
 			WorldEditNoCommandConsole(console)
 
-on command "//thaw" or "/worldedit:/thaw":
-	sender = player:
-		player doesn't have permission "worldedit.thaw" or "worldedit.*":
-			cancel event
-			WorldEditNoPermission(player)
-
 command //extinguish [<text>]:
 	aliases: worldedit:/extinguish, //ext, worldedit:/ext
 	description: &fWorldedit command //extinguish.
@@ -1228,12 +1011,6 @@ command //extinguish [<text>]:
 			WorldEditCMDExtinguish(player)
 		sender = console:
 			WorldEditNoCommandConsole(console)
-
-on command "//extinguish" or "/worldedit:/extinguish" or "//ext" or "/worldedit:/ext":
-	sender = player:
-		player doesn't have permission "worldedit.extinguish" or "worldedit.*":
-			cancel event
-			WorldEditNoPermission(player)
 
 command //tree [<text>] [<text>]:
 	aliases: worldedit:/tree
@@ -1293,12 +1070,6 @@ command //replace [<text>] [<text>]:
 		sender = console:
 			WorldEditNoCommandConsole(console)
 
-on command "//replace" or "/worldedit:/replace":
-	sender = player:
-		player doesn't have permission "worldedit.replace" or "worldedit.*":
-			cancel event
-			WorldEditNoPermission(player)
-
 command //sphere [<integer>] [<text>]:
 	aliases: worldedit:/sphere
 	description: &fWorldedit command //sphere.
@@ -1313,12 +1084,6 @@ command //sphere [<integer>] [<text>]:
 					WorldEditCMDSphere(player, arg 1, arg 2)
 		sender = console:
 			WorldEditNoCommandConsole(console)
-
-on command "//sphere" or "/worldedit:/sphere":
-	sender = player:
-		player doesn't have permission "worldedit.sphere" or "worldedit.*":
-			cancel event
-			WorldEditNoPermission(player)
 
 command //hsphere [<integer>] [<text>]:
 	aliases: worldedit:/hsphere
@@ -1335,12 +1100,6 @@ command //hsphere [<integer>] [<text>]:
 		sender = console:
 			WorldEditNoCommandConsole(console)
 
-on command "//hsphere" or "/worldedit:/hsphere":
-	sender = player:
-		player doesn't have permission "worldedit.hsphere" or "worldedit.*":
-			cancel event
-			WorldEditNoPermission(player)
-
 command //superpickaxe [<text>]:
 	aliases: worldedit:/superpickaxe
 	description: &fWorldedit command //superpickaxe.
@@ -1349,12 +1108,6 @@ command //superpickaxe [<text>]:
 			WorldEditCMDSuperpickaxe(player)
 		sender = console:
 			WorldEditNoCommandConsole(console)
-
-on command "//superpickaxe" or "/worldedit:/superpickaxe":
-	sender = player:
-		player doesn't have permission "worldedit.superpickaxe" or "worldedit.*":
-			cancel event
-			WorldEditNoPermission(player)
 
 command //walls [<text>]:
 	aliases: worldedit:/walls
@@ -1368,12 +1121,6 @@ command //walls [<text>]:
 		sender = console:
 			WorldEditNoCommandConsole(console)
 
-on command "//walls" or "/worldedit:/walls":
-	sender = player:
-		player doesn't have permission "worldedit.walls" or "worldedit.*":
-			cancel event
-			WorldEditNoPermission(player)
-
 command //faces [<text>]:
 	aliases: worldedit:/faces
 	description: &fWorldedit command //faces.
@@ -1386,12 +1133,6 @@ command //faces [<text>]:
 		sender = console:
 			WorldEditNoCommandConsole(console)
 
-on command "//faces" or "/worldedit:/faces":
-	sender = player:
-		player doesn't have permission "worldedit.faces" or "worldedit.*":
-			cancel event
-			WorldEditNoPermission(player)
-
 command //overlay [<text>]:
 	aliases: worldedit:/overlay
 	description: &fWorldedit command //overlay.
@@ -1403,12 +1144,6 @@ command //overlay [<text>]:
 				WorldEditCMDOverlay(player, arg 1)
 		sender = console:
 			WorldEditNoCommandConsole(console)
-
-on command "//overlay" or "/worldedit:/overlay":
-	sender = player:
-		player doesn't have permission "worldedit.overlay" or "worldedit.*":
-			cancel event
-			WorldEditNoPermission(player)
 
 command //cyl [<integer>] [<text>]:
 	aliases: worldedit:/cyl, //cylinder, worldedit:/cylinder
@@ -1425,12 +1160,6 @@ command //cyl [<integer>] [<text>]:
 		sender = console:
 			WorldEditNoCommandConsole(console)
 
-on command "//cyl" or "/worldedit:/cyl" or "//cylinder" or "/worldedit:/cycylinder":
-	sender = player:
-		player doesn't have permission "worldedit.cyl" or "worldedit.*":
-			cancel event
-			WorldEditNoPermission(player)
-
 command //down [<integer>] [<text>]:
 	aliases: worldedit:/down
 	description: &fWorldedit command //down.
@@ -1442,12 +1171,6 @@ command //down [<integer>] [<text>]:
 				WorldEditCMDDown(player, arg 1)
 		sender = console:
 			WorldEditNoCommandConsole(console)
-
-on command "//down" or "/worldedit:/down":
-	sender = player:
-		player doesn't have permission "worldedit.down" or "worldedit.*":
-			cancel event
-			WorldEditNoPermission(player)
 
 command //butcher [<integer>] [<text>]:
 	aliases: worldedit:/butcher
@@ -1461,8 +1184,134 @@ command //butcher [<integer>] [<text>]:
 		sender = console:
 			WorldEditNoCommandConsole(console)
 
-on command "//butcher" or "/worldedit:/butcher":
+
+on command:
 	sender = player:
-		player doesn't have permission "worldedit.butcher" or "worldedit.*":
-			cancel event
-			WorldEditNoPermission(player)
+		command = "/butcher" or "worldedit:/butcher":
+			player doesn't have permission "worldedit.butcher" or "worldedit.*":
+				cancel event
+				WorldEditNoPermission(player)
+		command = "/walls" or "worldedit:/walls":
+			player doesn't have permission "worldedit.walls" or "worldedit.*":
+				cancel event
+				WorldEditNoPermission(player)
+		command = "/faces" or "worldedit:/faces":
+			player doesn't have permission "worldedit.faces" or "worldedit.*":
+				cancel event
+				WorldEditNoPermission(player)
+		command = "/overlay" or "worldedit:/overlay":
+			player doesn't have permission "worldedit.overlay" or "worldedit.*":
+				cancel event
+				WorldEditNoPermission(player)
+		command = "/cyl" or "worldedit:/cyl" or "/cylinder" or "worldedit:/cycylinder":
+			player doesn't have permission "worldedit.cyl" or "worldedit.*":
+				cancel event
+				WorldEditNoPermission(player)
+		command = "/down" or "worldedit:/down":
+			player doesn't have permission "worldedit.down" or "worldedit.*":
+				cancel event
+				WorldEditNoPermission(player)
+		command = "/extinguish" or "worldedit:/extinguish" or "/ext" or "worldedit:/ext":
+			player doesn't have permission "worldedit." or "worldedit.*":
+				cancel event
+				WorldEditNoPermission(player)
+		command = "/replace" or "worldedit:/replace":
+			player doesn't have permission "worldedit." or "worldedit.*":
+				cancel event
+				WorldEditNoPermission(player)
+		command = "/sphere" or "worldedit:/sphere":
+			player doesn't have permission "worldedit." or "worldedit.*":
+				cancel event
+				WorldEditNoPermission(player)
+		command = "/hsphere" or "worldedit:/hsphere":
+			player doesn't have permission "worldedit." or "worldedit.*":
+				cancel event
+				WorldEditNoPermission(player)
+		command = "/superpickaxe" or "worldedit:/superpickaxe":
+			player doesn't have permission "worldedit." or "worldedit.*":
+				cancel event
+				WorldEditNoPermission(player)
+		command = "/tree" or "worldedit:/tree":
+			player doesn't have permission "worldedit.tree" or "worldedit.*":
+				cancel event
+				WorldEditNoPermission(player)
+		command = "/setbiome" or "worldedit:/setbiome":
+			player doesn't have permission "worldedit.setbiome" or "worldedit.*":
+				cancel event
+				WorldEditNoPermission(player)
+		command = "/cut" or "worldedit:/cut":
+			player doesn't have permission "worldedit.cut" or "worldedit.*":
+				cancel event
+				WorldEditNoPermission(player)
+		command = "/count" or "worldedit:/count":
+			player doesn't have permission "worldedit.count" or "worldedit.*":
+				cancel event
+				WorldEditNoPermission(player)
+		command = "/fixwater" or "worldedit:/fixwater":
+			player doesn't have permission "worldedit.fixwater" or "worldedit.*":
+				cancel event
+				WorldEditNoPermission(player)
+		command = "/fixlava" or "worldedit:/fixlava":
+			player doesn't have permission "worldedit.fixlava" or "worldedit.*":
+				cancel event
+				WorldEditNoPermission(player)
+		command = "/fixfire" or "worldedit:/fixfire":
+			player doesn't have permission "worldedit.fixfire" or "worldedit.*":
+				cancel event
+				WorldEditNoPermission(player)
+		command = "/thaw" or "worldedit:/thaw":
+			player doesn't have permission "worldedit.thaw" or "worldedit.*":
+				cancel event
+				WorldEditNoPermission(player)
+		command = "/hpos" or "worldedit:/hpos" or "/hposition" or "worldedit:/hposition":
+			player doesn't have permission "worldedit.hposition" or "worldedit.*":
+				cancel event
+				WorldEditNoPermission(player)
+		command = "/delchunk" or "worldedit:/delchunk" or "/deletechunk" or "worldedit:/deletechunk":
+			player doesn't have permission "worldedit.delchunk" or "worldedit.*":
+				cancel event
+				WorldEditNoPermission(player)
+		command = "/hdelchunk" or "worldedit:/hdelchunk" or "/hdeletechunk" or "worldedit:/hdeletechunk":
+			player doesn't have permission "worldedit.hdelchunk" or "worldedit.*":
+				cancel event
+				WorldEditNoPermission(player)
+		command = "/undo" or "worldedit:/undo":
+			player doesn't have permission "worldedit.undo" or "worldedit.*":
+				cancel event
+				WorldEditNoPermission(player)
+		command = "/redo" or "worldedit:/redo":
+			player doesn't have permission "worldedit.redo" or "worldedit.*":
+				cancel event
+				WorldEditNoPermission(player)
+		command = "/set" or "worldedit:/set":
+			player doesn't have permission "worldedit.set" or "worldedit.*":
+				cancel event
+				WorldEditNoPermission(player)
+		command = "worldedit" or "worldedit:worldedit" or "we" or "worldedit:we":
+			player doesn't have permission "worldedit.worldedit" or "worldedit.*":
+				cancel event
+				WorldEditNoPermission(player)
+		command = "/toggleeditwand" or "worldedit:/toggleeditwand":
+			player doesn't have permission "worldedit.toggleeditwand" or "worldedit.*":
+				cancel event
+				WorldEditNoPermission(player)
+		command = "/wand" or "/worldedit:/wand":
+			player doesn't have permission "worldedit.wand" or "worldedit.*":
+				cancel event
+				WorldEditNoPermission(player)
+		command = "/deselect" or "worldedit:/deselect" or "/desel" or "worldedit:/desel"  or "/deselection" or "worldedit:/deselection":
+			player doesn't have permission "worldedit.deselection" or "worldedit.*":
+				cancel event
+				WorldEditNoPermission(player)
+		command = "/up" or "worldedit:/up":
+			player doesn't have permission "worldedit.up" or "worldedit.*":
+				cancel event
+				WorldEditNoPermission(player)
+		command = "/size" or "worldedit:/size":
+			player doesn't have permission "worldedit.size" or "worldedit.*":
+				cancel event
+				WorldEditNoPermission(player)
+		command = "/pos" or "worldedit:/pos" or "/position" or "worldedit:/position":
+			player doesn't have permission "worldedit.position" or "worldedit.*":
+				cancel event
+				WorldEditNoPermission(player)
